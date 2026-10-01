@@ -9,7 +9,7 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const interval = Number(carousel.dataset.autoplay) || 0;
   let queued = false;
-  let paused = reducedMotion.matches; // con movimiento reducido no arranca solo
+  let paused = false; // con movimiento reducido también avanza, pero de golpe y sin deslizar (ver scrollTo)
   let onScreen = false;
 
   const atStart = () => track.scrollLeft <= 1;
