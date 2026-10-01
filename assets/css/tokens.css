@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/atkinson-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/atkinson-700.woff2") format("woff2");
+}
+
+:root {
+  /* Base */
+  --surface: #ffffff;
+  --surface-alt: #f3f4f5;
+  --border: #e2e5e7;
+  --border-strong: #aeb6bb;
+
+  /* Estructura: grafito neutro; las fotos y el logo ponen el color */
+  --ink: #1d2327;
+  --ink-muted: #566066;
+  --on-ink-muted: #c3c9cd;
+
+  /* Acción */
+  --action: #1d2327;
+  --on-action: #ffffff;
+  --action-hover: #f2b600;
+  --on-action-hover: #1d2327;
+
+  /* STEAM: una marca de color por disciplina, nunca fondos grandes */
+  --steam-s: #3f9d5b;
+  --steam-t: #1f8fc4;
+  --steam-e: #f2b600;
+  --steam-a: #d6336c;
+  --steam-m: #f07f1a;
+
+  /* Plataformas de Recursos: reutilizan la paleta STEAM */
+  --cat-lego: var(--steam-e);
+  --cat-spike: var(--steam-t);
+  --cat-roberta: var(--steam-s);
+
+  --font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-sm: 0.9rem;
+  --text-base: 1.0625rem;
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --text-xl: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.6vw, 3.4rem);
+  --text-hero: clamp(2.4rem, 1.4rem + 3.7vw, 4.25rem);
+  --measure: 68ch;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --page-width: 68rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --edge: max(var(--gutter), calc((100% - var(--page-width)) / 2));
+
+  --radius-control: 4px;
+  --radius-media: 2px;
+
+  --motion-duration-quick: 140ms;
+  --motion-duration-normal: 220ms;
+  --motion-duration-structural: 320ms;
+  --motion-duration-route: 240ms;
+  --motion-duration-scene: 760ms;
+  --motion-stagger: 70ms;
+  --motion-distance-sm: 8px;
+  --motion-distance-md: 16px;
+  --ease-enter: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-quick: 1ms;
+    --motion-duration-normal: 1ms;
+    --motion-duration-structural: 1ms;
+    --motion-duration-route: 1ms;
+    --motion-duration-scene: 1ms;
+    --motion-distance-sm: 0px;
+    --motion-distance-md: 0px;
+  }
+}

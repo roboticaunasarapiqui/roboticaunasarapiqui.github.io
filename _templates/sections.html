@@ -1,0 +1,84 @@
+<!--
+  Bloques para pegar en cualquier página (después del front matter).
+  Cada bloque usa solo clases de assets/css/components.css.
+  Alternar fondos: .section (blanco) y .section section-alt (niebla).
+  Los enlaces e imágenes locales llevan | relative_url para funcionar con Jekyll.
+-->
+
+
+<!-- Hero (solo en la página de inicio).
+     El título entra palabra por palabra: cada palabra va en <span class="word"><span>…</span></span>
+     (motion.css anima hasta 7 palabras; con más, las demás aparecen sin retraso). Un título normal también funciona. -->
+<section class="hero">
+    <div class="hero-copy">
+        <h1><span class="word"><span>Título</span></span> <span class="word"><span>del</span></span> <span class="word"><span>hero</span></span></h1>
+        <p>Una frase.</p>
+        <a class="action" href="{{ '/destino.html' | relative_url }}">Acción específica</a>
+    </div>
+    <img class="hero-media" src="{{ '/images/image-1.webp' | relative_url }}" alt="Descripción de la imagen" width="1600" height="1200" fetchpriority="high">
+    {% include steam-bar.html %}
+</section>
+
+
+<!-- Texto -->
+<section class="section flow">
+    <h2>Título de la sección</h2>
+    <p>Párrafo.</p>
+</section>
+
+
+<!-- Filas de destino -->
+<section class="section">
+    <ul class="row-links">
+        <li>
+            <a href="{{ '/destino.html' | relative_url }}">
+                <strong>Título</strong>
+                <span>Una línea.</span>
+            </a>
+        </li>
+    </ul>
+</section>
+
+
+<!-- Recursos con marcador de categoría
+     Variantes: resource-lego, resource-spike, resource-roberta; sin variante = neutro -->
+<section class="section section-alt flow">
+    <h2>Grupo de recursos</h2>
+    <div class="resource-grid">
+        <article class="resource resource-spike">
+            <h3>Nombre del recurso</h3>
+            <ul class="link-list">
+                <li><a href="https://ejemplo.org" target="_blank" rel="noopener noreferrer">Texto del enlace</a></li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+
+<!-- Galería (el primer elemento se muestra grande; usa 5 o 6 imágenes) -->
+<section class="section flow">
+    <h2>Galería</h2>
+    <ul class="gallery">
+        <li><img src="{{ '/images/image-4.webp' | relative_url }}" alt="Descripción" width="1600" height="1200" loading="lazy"></li>
+        <li><img src="{{ '/images/image-5.webp' | relative_url }}" alt="Descripción" width="1280" height="960" loading="lazy"></li>
+    </ul>
+</section>
+
+
+<!-- Video de YouTube -->
+<section class="section flow">
+    <h2>Video</h2>
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/ID_DEL_VIDEO" title="Descripción del video" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
+
+
+<!-- Correo protegido contra bots: el HTML no contiene la dirección; assets/js/email.js la arma.
+     Sin texto dentro del enlace, muestra la dirección; con texto, lo conserva.
+     Para correo@una.ac.cr: user = "correo", domain = "una.ac.cr". -->
+<section class="section flow">
+    <h2>Contacto</h2>
+    <address class="contact">
+        <p><strong>Nombre</strong></p>
+        <a class="contact-email" data-mail-user="correo" data-mail-domain="una.ac.cr"></a>
+    </address>
+</section>

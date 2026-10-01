@@ -1,0 +1,10 @@
+title: Robótica STEAM UNA Sarapiquí
+lang: es
+url: https://roboticaunasarapiqui.github.io
+baseurl: ""
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - _templates

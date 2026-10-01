@@ -1,65 +1,39 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Curso 0268-22 - Robótica para el Desarrollo de Habilidades STEAM. Capacitación docente en robótica educativa con LEGO EV3 y SPIKE Prime. Universidad Nacional de Costa Rica - Sarapiquí.">
-    <meta name="keywords" content="robótica, STEAM, educación, LEGO EV3, SPIKE Prime, capacitación docente, UNA, Sarapiquí">
-    <meta name="author" content="Universidad Nacional de Costa Rica">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://roboticaunasarapiqui.github.io/">
-    <meta property="og:title" content="Robótica para el Desarrollo de Habilidades STEAM | UNA Sarapiquí">
-    <meta property="og:description" content="¡Lleva STEAM a tu colegio! Capacitación para enseñar robótica de forma práctica y haz que tus estudiantes vivan experiencias de aprendizaje únicas.">
-    <meta property="og:image" content="https://roboticaunasarapiqui.github.io/og-image.jpg">
-    
-    <title>Robótica para el Desarrollo de Habilidades STEAM | UNA Sarapiquí</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <div id="header-placeholder"></div>
+---
+layout: default
+title: Robótica para el Desarrollo de Habilidades STEAM
+full_title: Robótica para el Desarrollo de Habilidades STEAM | UNA Sarapiquí
+description: Curso 0268-22 - Robótica para el Desarrollo de Habilidades STEAM. Capacitación docente en robótica educativa con LEGO EV3 y SPIKE Prime. Universidad Nacional de Costa Rica - Sarapiquí.
+og_description: ¡Lleva STEAM a tu colegio! Capacitación para enseñar robótica de forma práctica y haz que tus estudiantes vivan experiencias de aprendizaje únicas.
+---
+<section class="hero">
+    <div class="hero-copy">
+        <h1><span class="word"><span>Robótica</span></span> <span class="word"><span>para</span></span> <span class="word"><span>el</span></span> <span class="word"><span>Desarrollo</span></span> <span class="word"><span>de</span></span> <span class="word"><span>Habilidades</span></span> <span class="word"><span>STEAM</span></span></h1>
+        <p>Incentivando el desarrollo de las habilidades STEAM a partir de la robótica educativa en estudiantes de colegios de zonas rurales.</p>
+        <a class="action" href="{{ '/about.html' | relative_url }}">Ver el proyecto</a>
+    </div>
+    <img class="hero-media" src="{{ '/images/image-1.webp' | relative_url }}" alt="Equipo del curso junto a los robots LEGO que construyen, frente a un rótulo de la UNA" width="1600" height="1200" fetchpriority="high">
+    {% include steam-bar.html %}
+</section>
 
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">Robótica para el Desarrollo de Habilidades STEAM</h1>
-            <p class="hero-description">
-                Incentivando el desarrollo de las habilidades STEAM a partir de la robótica educativa en estudiantes de colegios de zonas rurales.
-            </p>
-            <a href="about.html" class="cta-button">Conocer más</a>
-        </div>
-    </section>
-
-    <section class="cards-section">
-        <div class="cards-container">
-            <a href="resources.html" class="card">
-                <div class="card-icon">📚</div>
-                <h2 class="card-title">Recursos Didácticos</h2>
-                <p class="card-description">
-                    Accede a materiales y recursos complementarios de robótica educativa.
-                </p>
+<section class="section">
+    <ul class="row-links">
+        <li>
+            <a href="{{ '/resources.html' | relative_url }}">
+                <strong>Recursos didácticos</strong>
+                <span>Materiales y recursos complementarios de robótica educativa.</span>
             </a>
-            
-            <a href="about.html" class="card">
-                <div class="card-icon">📋</div>
-                <h2 class="card-title">Sobre el Proyecto</h2>
-                <p class="card-description">
-                    Conoce el propósito del proyecto.
-                </p>
+        </li>
+        <li>
+            <a href="{{ '/about.html' | relative_url }}">
+                <strong>Sobre el proyecto</strong>
+                <span>Propósito, galería y video de los robots.</span>
             </a>
-            
-            <a href="contact.html" class="card">
-                <div class="card-icon">📞</div>
-                <h2 class="card-title">Contacto</h2>
-                <p class="card-description">
-                    Contacta con el responsable del proyecto para resolver dudas o solicitar más información.
-                </p>
+        </li>
+        <li>
+            <a href="{{ '/contact.html' | relative_url }}">
+                <strong>Contacto</strong>
+                <span>Escribe al responsable para resolver dudas o pedir información.</span>
             </a>
-        </div>
-    </section>
-
-    <div id="footer-placeholder"></div>
-
-    <script src="assets/js/load-components.js"></script>
-    <script src="assets/js/script.js"></script>
-</body>
-</html>
+        </li>
+    </ul>
+</section>

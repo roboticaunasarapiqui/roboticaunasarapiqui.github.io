@@ -1,80 +1,28 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conoce el curso 0268-22 de Robótica para el Desarrollo de Habilidades STEAM. Objetivos, metodología y certificación UNA.">
-    <meta name="keywords" content="robótica, STEAM, educación, capacitación docente, metodología, certificación, UNA">
-    <meta name="author" content="Universidad Nacional de Costa Rica">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://roboticaunasarapiqui.github.io/about.html">
-    <meta property="og:title" content="Sobre el Proyecto | Robótica STEAM UNA Sarapiquí">
-    <meta property="og:description" content="Curso de capacitación docente en robótica educativa con LEGO EV3 y SPIKE Prime. Certificación oficial UNA.">
-    
-    <title>Sobre el Proyecto | Robótica STEAM UNA Sarapiquí</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <div id="header-placeholder"></div>
+---
+layout: default
+title: Sobre el Proyecto
+description: Conoce el curso 0268-22 de Robótica para el Desarrollo de Habilidades STEAM. Objetivos, metodología y certificación UNA.
+og_description: Curso de capacitación docente en robótica educativa con LEGO EV3 y SPIKE Prime. Certificación oficial UNA.
+---
+<section class="section flow">
+    <h1>Sobre el proyecto</h1>
+    <p>El curso <strong>0268-22 - Robótica para el Desarrollo de Habilidades STEAM</strong> es una iniciativa de la Universidad Nacional de Costa Rica, Sección Regional Huetar Norte y Caribe - Sarapiquí, que busca incentivar las habilidades STEAM (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas) en estudiantes de secundaria a través de talleres de robótica, y capacitar a docentes para que puedan enseñar robótica en sus colegios.</p>
+    <p>El proyecto se desarrolla en colegios de zonas rurales para brindar acceso a conocimientos tecnológicos que amplían las oportunidades profesionales y académicas de los jóvenes.</p>
+</section>
 
-    <main class="content-section">
-        <h1 class="section-title">Sobre el Proyecto</h1>
-        
-        <div class="section-description">
-            <p>
-                El curso <strong> 0268-22 - Robótica para el Desarrollo de Habilidades STEAM </Strong> es una iniciativa de la Universidad Nacional de Costa Rica, Sección Regional Huetar Norte y Caribe - Sarapiquí, que busca incentivar las habilidades STEAM (Ciencia, Tecnología, Ingeniería, Arte y Matemáticas) en estudiantes de secundaria a través de talleres de robótica, y capacitar a docentes para que puedan enseñar robótica en sus colegios.
-            <p>El proyecto se desarrolla en colegios de zonas rurales para brindar acceso a conocimientos tecnológicos que amplían las oportunidades profesionales y académicas de los jóvenes.</p>
-            </p>
-        </div>
-        
-        <section class="mt-md">
-            <h2 class="section-title" style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md);">Galería del Proyecto</h2>
-            <div class="gallery-grid">
+<section class="section section-alt flow">
+    <h2>Galería del proyecto</h2>
+    <ul class="gallery">
+        <li><img src="{{ '/images/image-4.webp' | relative_url }}" alt="Estudiantes de un colegio armando robots en el aula con apoyo del equipo" width="1600" height="1200" loading="lazy"></li>
+        <li><img src="{{ '/images/image-5.webp' | relative_url }}" alt="Integrante del equipo presenta un robot LEGO en una exhibición de robótica internacional" width="1280" height="960" loading="lazy"></li>
+        <li><img src="{{ '/images/image-6.webp' | relative_url }}" alt="Estudiantes observan un robot LEGO en movimiento sobre una cancha techada" width="1200" height="1600" loading="lazy"></li>
+        <li><img src="{{ '/images/image-2.webp' | relative_url }}" alt="Estudiantes y equipo de la UNA alrededor de robots LEGO sobre una cancha" width="1080" height="1433" loading="lazy"></li>
+        <li><img src="{{ '/images/image-3.webp' | relative_url }}" alt="Estudiantes con kits LEGO en un aula mientras un instructor explica" width="1600" height="1200" loading="lazy"></li>
+        <li><img src="{{ '/images/image-1.webp' | relative_url }}" alt="Equipo del curso junto a los robots LEGO que construyen" width="1600" height="1200" loading="lazy"></li>
+    </ul>
+</section>
 
-                <div class="gallery-item">
-                    <img src="images/image-2.webp" alt="Estudiantes trabajando con LEGO EV3" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image-3.webp" alt="Taller de robótica STEAM" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image-4.webp" alt="Proyectos de robótica educativa" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image-5.webp" alt="Proyecto de robótica educativa" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image-6.webp" alt="Taller de robótica" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image-1.webp" alt="Foto del proyecto de robótica educativa" loading="lazy">
-                </div>
-            </div>
-        </section>
-
-        <section class="mt-md">
-            <h2 class="section-title" style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md);">Nuestros Robots</h2>
-            
-            <div class="video-container">
-                <div class="video-embed">
-                    <iframe 
-                        src="https://www.youtube.com/embed/_BQrUFEMWD0" 
-                        title="Video del proyecto de robótica educativa" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="footer-placeholder"></div>
-
-    <script src="assets/js/load-components.js"></script>
-    <script src="assets/js/script.js"></script>
-</body>
-</html>
-
+<section class="section flow">
+    <h2>Nuestros robots</h2>
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/_BQrUFEMWD0" title="Video del proyecto de robótica educativa" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>

@@ -1,0 +1,8 @@
+- label: Inicio
+  url: /
+- label: Recursos
+  url: /resources.html
+- label: Sobre el proyecto
+  url: /about.html
+- label: Contacto
+  url: /contact.html

@@ -1,0 +1,253 @@
+/*
+  Intent:   una sola escena de entrada (hero), feedback en acciones y continuidad entre páginas.
+  Spec:     tokens --motion-* y --ease-*; solo opacity, translate, scale, clip-path y color.
+  Fallback: las animaciones de entrada y de scroll solo existen con prefers-reduced-motion: no-preference;
+            animation-timeline va dentro de @supports y los navegadores sin soporte muestran el estado final.
+*/
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-duration-route);
+  animation-timing-function: var(--ease-standard);
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+.site-footer {
+  view-transition-name: site-footer;
+}
+
+/* Feedback */
+
+a {
+  transition:
+    color var(--motion-duration-quick) var(--ease-standard),
+    text-decoration-thickness var(--motion-duration-quick) var(--ease-standard);
+}
+
+.site-nav a {
+  transition: border-bottom-color var(--motion-duration-quick) var(--ease-standard);
+}
+
+.action::before,
+.row-links a::before {
+  transition: scale var(--motion-duration-structural) var(--ease-enter);
+}
+
+.row-links strong {
+  transition:
+    translate var(--motion-duration-normal) var(--ease-enter),
+    color var(--motion-duration-quick) var(--ease-standard);
+}
+
+/* Menú móvil */
+
+.site-nav {
+  transition:
+    opacity var(--motion-duration-quick) var(--ease-exit),
+    translate var(--motion-duration-quick) var(--ease-exit),
+    visibility 0s linear var(--motion-duration-quick);
+}
+
+.nav-toggle[aria-expanded="true"] + .site-nav {
+  transition:
+    opacity var(--motion-duration-normal) var(--ease-enter),
+    translate var(--motion-duration-normal) var(--ease-enter),
+    visibility 0s;
+}
+
+.nav-toggle-bars,
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  transition:
+    translate var(--motion-duration-quick) var(--ease-standard),
+    rotate var(--motion-duration-quick) var(--ease-standard),
+    background-color var(--motion-duration-quick) var(--ease-standard);
+}
+
+@media (min-width: 48rem) {
+  .site-nav {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Escena del hero: título por palabras, foto en barrido, luego texto y botón */
+
+  @keyframes word-up {
+    from {
+      translate: 0 105%;
+    }
+
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes wipe-up {
+    from {
+      clip-path: inset(100% 0 0 0);
+      scale: 1.08;
+    }
+
+    to {
+      clip-path: inset(0);
+      scale: 1;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 var(--motion-distance-md);
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  .hero h1 .word > span {
+    animation: word-up var(--motion-duration-scene) var(--ease-enter) both;
+    animation-delay: calc(120ms + var(--i, 0) * var(--motion-stagger));
+  }
+
+  .hero h1 .word:nth-child(2) > span { --i: 1; }
+  .hero h1 .word:nth-child(3) > span { --i: 2; }
+  .hero h1 .word:nth-child(4) > span { --i: 3; }
+  .hero h1 .word:nth-child(5) > span { --i: 4; }
+  .hero h1 .word:nth-child(6) > span { --i: 5; }
+  .hero h1 .word:nth-child(7) > span { --i: 6; }
+
+  .hero-media {
+    animation: wipe-up calc(var(--motion-duration-scene) + 200ms) var(--ease-enter) 200ms both;
+  }
+
+  .hero-copy > p,
+  .hero-copy > .action {
+    animation: rise var(--motion-duration-structural) var(--ease-enter) 700ms both;
+  }
+
+  .hero-copy > .action {
+    animation-delay: 820ms;
+  }
+
+  /* La franja STEAM encaja pieza por pieza al final de la escena */
+
+  @keyframes snap-in {
+    from {
+      scale: 0 1;
+    }
+
+    to {
+      scale: 1 1;
+    }
+  }
+
+  .steam-bar i {
+    transform-origin: left;
+    animation: snap-in var(--motion-duration-structural) var(--ease-enter) both;
+    animation-delay: calc(950ms + var(--i, 0) * var(--motion-stagger));
+  }
+
+  .steam-bar i:nth-child(2) { --i: 1; }
+  .steam-bar i:nth-child(3) { --i: 2; }
+  .steam-bar i:nth-child(4) { --i: 3; }
+  .steam-bar i:nth-child(5) { --i: 4; }
+
+  /* El logo salta al pasar el cursor */
+
+  @keyframes hop {
+    0% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    35% {
+      translate: 0 -9px;
+      rotate: -7deg;
+    }
+
+    60% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    78% {
+      translate: 0 -3px;
+      rotate: -2deg;
+    }
+
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+  }
+
+  @media (hover: hover) {
+    .site-brand:hover img {
+      animation: hop 560ms var(--ease-standard);
+    }
+  }
+
+  .site-brand:focus-visible img {
+    animation: hop 560ms var(--ease-standard);
+  }
+
+  /* Scroll: sin JS, solo donde el navegador soporta animation-timeline */
+
+  @supports (animation-timeline: view()) {
+    @keyframes reveal-media {
+      from {
+        clip-path: inset(14%);
+        scale: 1.12;
+      }
+
+      to {
+        clip-path: inset(0);
+        scale: 1;
+      }
+    }
+
+    @keyframes header-edge {
+      from {
+        border-bottom-color: transparent;
+      }
+
+      to {
+        border-bottom-color: var(--border);
+      }
+    }
+
+    .gallery img {
+      animation: reveal-media linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    .site-header {
+      animation: header-edge linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

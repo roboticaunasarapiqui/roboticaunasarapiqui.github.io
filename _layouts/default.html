@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    {%- if page.full_title %}
+    {%- assign head_title = page.full_title %}
+    {%- else %}
+    {%- assign head_title = page.title | append: " | " | append: site.title %}
+    {%- endif %}
+    <title>{{ head_title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <meta name="author" content="Universidad Nacional de Costa Rica">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{{ head_title }}">
+    <meta property="og:description" content="{{ page.og_description | default: page.description }}">
+    <meta property="og:image" content="{{ '/images/image-1.webp' | absolute_url }}">
+
+    <link rel="icon" href="{{ '/images/logo-rana.webp' | relative_url }}" type="image/webp">
+    <link rel="preload" href="{{ '/assets/fonts/atkinson-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/base.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/motion.css' | relative_url }}">
+    <script src="{{ '/assets/js/nav.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/email.js' | relative_url }}" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    {% include header.html %}
+
+    <main id="contenido">
+        {{ content }}
+    </main>
+
+    {% include footer.html %}
+</body>
+</html>
