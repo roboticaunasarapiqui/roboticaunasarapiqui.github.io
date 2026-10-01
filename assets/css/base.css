@@ -27,6 +27,8 @@ body {
 
 main {
   flex: 1;
+  /* los reveals con scale > 1 no deben crear scroll horizontal */
+  overflow-x: clip;
 }
 
 img,

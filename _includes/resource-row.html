@@ -1,0 +1,24 @@
+{%- comment -%}
+  Una fila de recurso. Parámetro: item (un elemento de groups[].items en _data/resources.yml).
+{%- endcomment -%}
+<li class="resource-row">
+    <h3 class="resource-title">
+        {%- if include.item.mail -%}
+        {%- assign person = site.data.people | where: "id", include.item.mail | first -%}
+        <a data-mail-user="{{ person.mail_user }}" data-mail-domain="{{ person.mail_domain }}">{{ include.item.title }}</a>
+        {%- else -%}
+        <a href="{{ include.item.url }}" target="_blank" rel="noopener noreferrer">{{ include.item.title }}</a>
+        {%- endif -%}
+    </h3>
+    <p class="resource-note">{{ include.item.description }}</p>
+    {%- if include.item.platform or include.item.access %}
+    <div class="resource-meta">
+        {%- if include.item.platform %}
+        <span class="tag tag-{{ include.item.platform }}">{{ site.data.resources.platforms[include.item.platform] }}</span>
+        {%- endif %}
+        {%- if include.item.access %}
+        <span class="resource-access">{{ site.data.resources.access[include.item.access] }}</span>
+        {%- endif %}
+    </div>
+    {%- endif %}
+</li>

@@ -31,13 +31,62 @@ a {
     text-decoration-thickness var(--motion-duration-quick) var(--ease-standard);
 }
 
-.site-nav a {
-  transition: border-bottom-color var(--motion-duration-quick) var(--ease-standard);
+@media (hover: hover) {
+  .footer-icon:hover {
+    scale: 1.12;
+  }
+}
+
+.footer-icon {
+  transition:
+    color var(--motion-duration-quick) var(--ease-standard),
+    scale var(--motion-duration-normal) var(--ease-enter);
 }
 
 .action::before,
-.row-links a::before {
+.row-links a::before,
+.site-nav a::after,
+.footer-link::after {
   transition: scale var(--motion-duration-structural) var(--ease-enter);
+}
+
+.copy-button,
+.carousel-button {
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    border-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard);
+}
+
+/* El botón flotante se desvanece al salir; visibility espera a que termine el fade */
+
+.to-top {
+  translate: 0 var(--motion-distance-sm);
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard),
+    opacity var(--motion-duration-normal) var(--ease-exit),
+    translate var(--motion-duration-normal) var(--ease-exit),
+    visibility 0s linear var(--motion-duration-normal);
+}
+
+.to-top.is-visible {
+  translate: 0 0;
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard),
+    opacity var(--motion-duration-normal) var(--ease-enter),
+    translate var(--motion-duration-normal) var(--ease-enter),
+    visibility 0s;
+}
+
+.to-top svg {
+  transition: translate var(--motion-duration-normal) var(--ease-enter);
+}
+
+.to-top:hover svg,
+.to-top:focus-visible svg {
+  translate: 0 -3px;
 }
 
 .row-links strong {
@@ -153,14 +202,17 @@ a {
 
   .steam-bar i {
     transform-origin: left;
+  }
+
+  .hero .steam-bar i {
     animation: snap-in var(--motion-duration-structural) var(--ease-enter) both;
     animation-delay: calc(950ms + var(--i, 0) * var(--motion-stagger));
   }
 
-  .steam-bar i:nth-child(2) { --i: 1; }
-  .steam-bar i:nth-child(3) { --i: 2; }
-  .steam-bar i:nth-child(4) { --i: 3; }
-  .steam-bar i:nth-child(5) { --i: 4; }
+  .hero .steam-bar i:nth-child(2) { --i: 1; }
+  .hero .steam-bar i:nth-child(3) { --i: 2; }
+  .hero .steam-bar i:nth-child(4) { --i: 3; }
+  .hero .steam-bar i:nth-child(5) { --i: 4; }
 
   /* El logo salta al pasar el cursor */
 
@@ -226,7 +278,27 @@ a {
       }
     }
 
-    .gallery img {
+    @keyframes draw-line {
+      from {
+        scale: 0 1;
+      }
+
+      to {
+        scale: 1 1;
+      }
+    }
+
+    @keyframes drift {
+      from {
+        translate: 0 0;
+      }
+
+      to {
+        translate: 0 28px;
+      }
+    }
+
+    .video {
       animation: reveal-media linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 70%;
@@ -237,6 +309,63 @@ a {
       animation-timeline: scroll(root);
       animation-range: 0 80px;
     }
+
+    /* Barra de lectura bajo el header */
+
+    .site-header::after {
+      animation: draw-line linear both;
+      animation-timeline: scroll(root);
+    }
+
+    /* Títulos y filas entran al llegar a pantalla; cada fila dibuja su línea inferior */
+
+    .section h2 {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    .row-links li,
+    .resource-row {
+      view-timeline: --row;
+      animation: rise linear both;
+      animation-timeline: --row;
+      animation-range: entry 0% entry 55%;
+    }
+
+    .row-links li::after,
+    .resource-row::after {
+      animation: draw-line linear both;
+      animation-timeline: --row;
+      animation-range: entry 15% entry 90%;
+    }
+
+    /* La foto del hero se desplaza más lento que el scroll */
+
+    .hero-media {
+      animation:
+        wipe-up calc(var(--motion-duration-scene) + 200ms) var(--ease-enter) 200ms both,
+        drift linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 600px;
+    }
+
+    /* La franja del footer se despliega pieza por pieza al llegar al final */
+
+    .site-footer {
+      view-timeline: --footer;
+    }
+
+    .site-footer .steam-bar i {
+      animation: snap-in linear both;
+      animation-timeline: --footer;
+    }
+
+    .site-footer .steam-bar i:nth-child(1) { animation-range: entry 0% entry 45%; }
+    .site-footer .steam-bar i:nth-child(2) { animation-range: entry 10% entry 55%; }
+    .site-footer .steam-bar i:nth-child(3) { animation-range: entry 20% entry 65%; }
+    .site-footer .steam-bar i:nth-child(4) { animation-range: entry 30% entry 75%; }
+    .site-footer .steam-bar i:nth-child(5) { animation-range: entry 40% entry 85%; }
   }
 }
 

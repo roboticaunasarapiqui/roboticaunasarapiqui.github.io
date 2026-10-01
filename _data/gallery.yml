@@ -1,0 +1,48 @@
+# Fotos del carrusel de about.html. El orden del archivo es el orden en que salen:
+# la primera es la que se ve al entrar, así que va la que mejor presenta el proyecto.
+#
+# Cada foto lleva:
+#   src      archivo dentro de images/ (.webp, 1600 px de ancho como máximo)
+#   alt      qué se ve en la foto, en una frase
+#   width    ancho real en píxeles
+#   height   alto real en píxeles (con los dos, la página no salta al cargar la foto)
+#
+# Recomendado: de 8 a 12 fotos. Pasadas 20, mejor una página de álbum aparte.
+# El orden actual alterna fotos horizontales y verticales para que la tira no se vea repetida.
+
+- src: image-1.webp
+  alt: Equipo del curso junto a los robots LEGO que construyen
+  width: 1600
+  height: 1200
+- src: image-4.webp
+  alt: Estudiantes de un colegio armando robots en el aula con apoyo del equipo
+  width: 1600
+  height: 1200
+- src: image-6.webp
+  alt: Estudiantes observan un robot LEGO en movimiento sobre una cancha techada
+  width: 1200
+  height: 1600
+- src: image-3.webp
+  alt: Estudiantes con kits LEGO en un aula mientras un instructor explica
+  width: 1600
+  height: 1200
+- src: docentes-con-robots.webp
+  alt: Docentes y equipo del curso agachados alrededor de robots LEGO sobre las cajas de sus kits
+  width: 1200
+  height: 1600
+- src: image-5.webp
+  alt: Integrante del equipo presenta un robot LEGO en una exhibición de robótica internacional
+  width: 1280
+  height: 960
+- src: image-2.webp
+  alt: Estudiantes y equipo de la UNA alrededor de robots LEGO sobre una cancha
+  width: 1080
+  height: 1433
+- src: equipo-en-escenario.webp
+  alt: Seis integrantes del equipo y colaboradores sostienen robots LEGO frente a un escenario
+  width: 1600
+  height: 1200
+- src: robots-en-exhibicion.webp
+  alt: Robots LEGO alineados sobre una mesa con un camino rojo de la UNA y el rótulo del curso, con un robot de cartón a la izquierda
+  width: 1200
+  height: 1600

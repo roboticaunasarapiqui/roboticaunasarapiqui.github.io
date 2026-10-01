@@ -3,55 +3,23 @@ layout: default
 title: Recursos
 description: Recursos didácticos para robótica educativa con LEGO EV3 y SPIKE Prime.
 ---
-<section class="section flow">
+{%- assign groups = site.data.resources.groups %}
+{%- for group in groups %}
+{%- assign parity = forloop.index0 | modulo: 2 %}
+<section class="section{% if parity == 1 %} section-alt{% endif %} flow">
+    {%- if forloop.first %}
     <h1>Recursos didácticos</h1>
-    <h2>Herramientas</h2>
-    <div class="resource-grid">
-        <article class="resource resource-lego">
-            <h3>LEGO MINDSTORMS EV3</h3>
-            <ul class="link-list">
-                <li><a href="https://education.lego.com/en-us/downloads/mindstorms-ev3/software/" target="_blank" rel="noopener noreferrer">Descargar EV3 Classroom</a></li>
-                <li><a href="https://drive.google.com/file/d/1-_yNmDRNOOXcbHIMDJL2Bv1Hyk-Wwre-/view?usp=sharing" target="_blank" rel="noopener noreferrer">Descargar LEGO MINDSTORMS Education EV3</a></li>
-            </ul>
-        </article>
-
-        <article class="resource resource-spike">
-            <h3>LEGO SPIKE Prime</h3>
-            <ul class="link-list">
-                <li><a href="https://education.lego.com/es-es/downloads/spike-app/software" target="_blank" rel="noopener noreferrer">LEGO Education SPIKE App</a></li>
-                <li><a href="https://spike.legoeducation.com/prime/lobby/" target="_blank" rel="noopener noreferrer">SPIKE Education Online</a></li>
-            </ul>
-        </article>
-
-        <article class="resource resource-roberta">
-            <h3>Open Roberta Lab</h3>
-            <ul class="link-list">
-                <li><a href="https://lab.open-roberta.org/" target="_blank" rel="noopener noreferrer">Simulador Open Roberta Lab</a></li>
-            </ul>
-        </article>
-    </div>
+    {%- endif %}
+    <h2>{{ group.title }}</h2>
+    <ul class="resource-list">
+        {%- for item in group.items %}
+        {% include resource-row.html item=item %}
+        {%- endfor %}
+    </ul>
 </section>
+{%- endfor %}
 
-<section class="section section-alt flow">
-    <h2>Recursos de apoyo</h2>
-    <div class="resource-grid">
-        <article class="resource">
-            <h3>Recursos para docentes</h3>
-            <ul class="link-list">
-                <li><a href="https://drive.google.com/drive/folders/1mIdLzFPKcr0AfSPD0a_cidSEbQTPsdt8?usp=sharing" target="_blank" rel="noopener noreferrer">Solicitar materiales para docentes</a></li>
-            </ul>
-        </article>
-
-        <article class="resource">
-            <h3>Otros recursos</h3>
-            <ul class="link-list">
-                <li><a data-mail-user="steven.cruz.sancho" data-mail-domain="una.ac.cr">Solicitar otros recursos</a></li>
-            </ul>
-        </article>
-    </div>
-</section>
-
-<section class="section flow">
+<section class="section{% assign odd = groups.size | modulo: 2 %}{% if odd == 1 %} section-alt{% endif %} flow">
     <h2>Primeros pasos con SPIKE Prime</h2>
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/_BQrUFEMWD0" title="Primeros pasos con LEGO Education SPIKE Prime: robótica y programación" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>

@@ -12,14 +12,7 @@ og_description: Curso de capacitación docente en robótica educativa con LEGO E
 
 <section class="section section-alt flow">
     <h2>Galería del proyecto</h2>
-    <ul class="gallery">
-        <li><img src="{{ '/images/image-4.webp' | relative_url }}" alt="Estudiantes de un colegio armando robots en el aula con apoyo del equipo" width="1600" height="1200" loading="lazy"></li>
-        <li><img src="{{ '/images/image-5.webp' | relative_url }}" alt="Integrante del equipo presenta un robot LEGO en una exhibición de robótica internacional" width="1280" height="960" loading="lazy"></li>
-        <li><img src="{{ '/images/image-6.webp' | relative_url }}" alt="Estudiantes observan un robot LEGO en movimiento sobre una cancha techada" width="1200" height="1600" loading="lazy"></li>
-        <li><img src="{{ '/images/image-2.webp' | relative_url }}" alt="Estudiantes y equipo de la UNA alrededor de robots LEGO sobre una cancha" width="1080" height="1433" loading="lazy"></li>
-        <li><img src="{{ '/images/image-3.webp' | relative_url }}" alt="Estudiantes con kits LEGO en un aula mientras un instructor explica" width="1600" height="1200" loading="lazy"></li>
-        <li><img src="{{ '/images/image-1.webp' | relative_url }}" alt="Equipo del curso junto a los robots LEGO que construyen" width="1600" height="1200" loading="lazy"></li>
-    </ul>
+    {% include carousel.html photos=site.data.gallery label="Fotos del proyecto" autoplay=5000 %}
 </section>
 
 <section class="section flow">

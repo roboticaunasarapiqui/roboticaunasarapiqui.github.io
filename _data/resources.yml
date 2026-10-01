@@ -1,0 +1,93 @@
+# Recursos agrupados por tipo. resources.html recorre `groups` y no necesita cambios.
+#
+# Cada recurso lleva:
+#   title        texto del enlace
+#   description  una línea
+#   platform     (opcional) clave de `platforms`
+#   access       (opcional) clave de `access`: `online` o `offline`
+#   url          enlace externo
+#   mail         o `id` de una persona de people.yml: el recurso se solicita por correo
+#
+# Plataforma nueva: agregarla en `platforms` y definir `--cat-<clave>` en tokens.css
+# más la regla `.tag-<clave>` en components.css.
+
+platforms:
+  lego: LEGO EV3
+  spike: SPIKE Prime
+  roberta: Open Roberta
+  arduino: Arduino
+
+access:
+  online: En línea
+  offline: Sin internet
+
+groups:
+  - title: Editores y software
+    items:
+      - title: EV3 Classroom
+        description: Programación por bloques del robot EV3, desde LEGO Education.
+        platform: lego
+        access: offline
+        url: https://education.lego.com/en-us/downloads/mindstorms-ev3/software/
+      - title: LEGO MINDSTORMS Education EV3
+        description: Instalador del software EV3, compartido en Drive.
+        platform: lego
+        access: offline
+        url: https://drive.google.com/file/d/1-_yNmDRNOOXcbHIMDJL2Bv1Hyk-Wwre-/view?usp=sharing
+      - title: LEGO Education SPIKE App
+        description: Aplicación oficial para programar SPIKE Prime.
+        platform: spike
+        access: offline
+        url: https://education.lego.com/es-es/downloads/spike-app/software
+      - title: SPIKE Education Online
+        description: Versión en línea de SPIKE, sin instalar nada.
+        platform: spike
+        access: online
+        url: https://spike.legoeducation.com/prime/lobby/
+      - title: Arduino IDE
+        description: Editor oficial para escribir y cargar programas en las placas Arduino.
+        platform: arduino
+        access: offline
+        url: https://www.arduino.cc/en/software
+
+  - title: Simuladores
+    items:
+      - title: Open Roberta Lab
+        description: Simulador en línea para programar robots por bloques.
+        platform: roberta
+        access: online
+        url: https://lab.open-roberta.org/
+      - title: Tinkercad Circuits
+        description: Simula circuitos y programas de Arduino en el navegador. Pide cuenta de Autodesk.
+        platform: arduino
+        access: online
+        url: https://www.tinkercad.com/circuits
+      - title: Wokwi
+        description: Simula Arduino y ESP32 con el código real, sin instalar nada.
+        platform: arduino
+        access: online
+        url: https://wokwi.com
+      - title: Tinkered
+        description: Presentación de la plataforma para diseñar y simular circuitos con Arduino en el navegador.
+        platform: arduino
+        access: online
+        url: https://www.tinkered.ai/withdiode
+      - title: Tinkered, aplicación
+        description: Abre la aplicación para crear y simular circuitos con Arduino, sin instalar nada.
+        platform: arduino
+        access: online
+        url: https://app.tinkered.ai/p
+      - title: Cirkit Designer
+        description: Editor de circuitos en el navegador para diseñar proyectos con Arduino.
+        platform: arduino
+        access: online
+        url: https://app.cirkitdesigner.com
+
+  - title: Material de apoyo
+    items:
+      - title: Solicitar materiales para docentes
+        description: Carpeta de Drive con material para docentes.
+        url: https://drive.google.com/drive/folders/1mIdLzFPKcr0AfSPD0a_cidSEbQTPsdt8?usp=sharing
+      - title: Solicitar otros recursos
+        description: Diagramas, kits y otros materiales se piden por correo al responsable.
+        mail: responsable

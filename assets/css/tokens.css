@@ -43,6 +43,7 @@
   --cat-lego: var(--steam-e);
   --cat-spike: var(--steam-t);
   --cat-roberta: var(--steam-s);
+  --cat-arduino: var(--steam-a);
 
   --font: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
   --text-sm: 0.9rem;

@@ -1,0 +1,25 @@
+{%- comment -%}
+  Carrusel de fotos. Parámetros: photos (lista de _data/gallery.yml), label (nombre del carrusel)
+  y autoplay (opcional, milisegundos entre fotos; sin él no avanza solo).
+  Los botones nacen ocultos: carousel.js los muestra, así que sin JavaScript queda una tira que se desliza.
+{%- endcomment -%}
+<div class="carousel" role="region" aria-roledescription="carrusel" aria-label="{{ include.label }}" data-carousel{% if include.autoplay %} data-autoplay="{{ include.autoplay }}"{% endif %}>
+    <ul class="carousel-track" tabindex="0" aria-label="{{ include.label }}">
+        {%- for photo in include.photos %}
+        <li class="carousel-slide"><img src="{{ '/images/' | append: photo.src | relative_url }}" alt="{{ photo.alt }}" width="{{ photo.width }}" height="{{ photo.height }}" loading="lazy"></li>
+        {%- endfor %}
+    </ul>
+    <div class="carousel-controls" hidden>
+        <button class="carousel-button" type="button" aria-label="Foto anterior" data-carousel-prev>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M20 12H5M11.5 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="carousel-button" type="button" aria-label="Foto siguiente" data-carousel-next>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M12.5 5l7 7-7 7"/></svg>
+        </button>
+        <button class="carousel-button" type="button" aria-label="Pausar el avance automático" data-carousel-toggle data-playing="true" hidden>
+            <svg class="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>
+        </button>
+        <p class="carousel-count"><span data-carousel-current>1</span> de {{ include.photos | size }}</p>
+    </div>
+</div>

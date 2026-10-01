@@ -40,28 +40,20 @@
 </section>
 
 
-<!-- Recursos con marcador de categoría
-     Variantes: resource-lego, resource-spike, resource-roberta; sin variante = neutro -->
-<section class="section section-alt flow">
+<!-- Recursos: salen de _data/resources.yml (grupos por tipo, una fila por recurso).
+     Para agregar uno, editar el YAML; el HTML no cambia. Una fila suelta: -->
+<section class="section flow">
     <h2>Grupo de recursos</h2>
-    <div class="resource-grid">
-        <article class="resource resource-spike">
-            <h3>Nombre del recurso</h3>
-            <ul class="link-list">
-                <li><a href="https://ejemplo.org" target="_blank" rel="noopener noreferrer">Texto del enlace</a></li>
-            </ul>
-        </article>
-    </div>
+    <ul class="resource-list">
+        {% include resource-row.html item=site.data.resources.groups[0].items[0] %}
+    </ul>
 </section>
 
 
-<!-- Galería (el primer elemento se muestra grande; usa 5 o 6 imágenes) -->
+<!-- Carrusel de fotos: salen de _data/gallery.yml (de 8 a 12 fotos; el HTML no cambia) -->
 <section class="section flow">
     <h2>Galería</h2>
-    <ul class="gallery">
-        <li><img src="{{ '/images/image-4.webp' | relative_url }}" alt="Descripción" width="1600" height="1200" loading="lazy"></li>
-        <li><img src="{{ '/images/image-5.webp' | relative_url }}" alt="Descripción" width="1280" height="960" loading="lazy"></li>
-    </ul>
+    {% include carousel.html photos=site.data.gallery label="Fotos del proyecto" %}
 </section>
 
 
@@ -72,13 +64,11 @@
 </section>
 
 
-<!-- Correo protegido contra bots: el HTML no contiene la dirección; assets/js/email.js la arma.
-     Sin texto dentro del enlace, muestra la dirección; con texto, lo conserva.
-     Para correo@una.ac.cr: user = "correo", domain = "una.ac.cr". -->
+<!-- Contacto: las personas salen de _data/people.yml; el HTML no lleva la dirección
+     y assets/js/email.js la arma. Para sumar a alguien, agregarlo al YAML. -->
 <section class="section flow">
     <h2>Contacto</h2>
-    <address class="contact">
-        <p><strong>Nombre</strong></p>
-        <a class="contact-email" data-mail-user="correo" data-mail-domain="una.ac.cr"></a>
-    </address>
+    {% for person in site.data.people %}
+    {% include person.html person=person %}
+    {% endfor %}
 </section>

@@ -6,9 +6,7 @@ og_description: Ponte en contacto con el equipo del proyecto de robótica educat
 ---
 <section class="section flow">
     <h1>Contacto</h1>
-    <address class="contact">
-        <h2>Responsable del proyecto</h2>
-        <p><strong>MAG. Steven Cruz Sancho</strong></p>
-        <a class="contact-email" data-mail-user="steven.cruz.sancho" data-mail-domain="una.ac.cr"></a>
-    </address>
+    {%- for person in site.data.people %}
+    {% include person.html person=person %}
+    {%- endfor %}
 </section>

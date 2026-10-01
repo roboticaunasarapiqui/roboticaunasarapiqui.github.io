@@ -1,0 +1,7 @@
+# Personas de contacto. El correo va en dos partes para que no aparezca completo en el HTML.
+# `id` es la referencia que usan otros datos (por ejemplo `mail:` en resources.yml).
+- id: responsable
+  name: MAG. Steven Cruz Sancho
+  role: Responsable del proyecto
+  mail_user: steven.cruz.sancho
+  mail_domain: una.ac.cr

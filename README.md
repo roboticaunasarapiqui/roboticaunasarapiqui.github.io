@@ -14,18 +14,24 @@ HTML, CSS y JavaScript sin dependencias. GitHub Pages compila el sitio con Jekyl
 ```
 index.html  about.html  resources.html  contact.html  404.html   contenido de cada página (front matter + HTML)
 _layouts/default.html    <head>, skip-link, header, <main> y footer comunes
-_includes/               header.html (menú desde _data/nav.yml) y footer.html
+_includes/               header, footer (enlaces de nav.yml y contacto de people.yml), steam-bar, resource-row y person
 _data/nav.yml            enlaces del menú: única fuente de verdad
+_data/resources.yml      recursos agrupados por tipo (editores, simuladores, apoyo)
+_data/people.yml         personas de contacto (el correo va en dos partes)
+_data/author.yml         quién hizo el sitio (nombre y usuario de GitHub, se muestra en el footer)
+_data/gallery.yml        fotos del carrusel de "Sobre el proyecto" (de 8 a 12; pasadas 20, mejor un álbum aparte)
 _config.yml              título, idioma y url del sitio
 images/
 assets/
   css/
     tokens.css       colores, tipografía, espacio, motion
     base.css         reset, tipografía, enlaces, foco
-    components.css   header, footer, hero, filas, recursos, galería, video, contacto
+    components.css   header, footer, hero, filas, recursos, carrusel, video, contacto
     motion.css       transiciones y animaciones (respeta prefers-reduced-motion)
   js/nav.js          menú móvil
-  js/email.js        arma los enlaces de correo (el HTML no contiene la dirección)
+  js/email.js        arma los enlaces de correo (el HTML no contiene la dirección) y el botón de copiar
+  js/to-top.js       botón flotante "Volver arriba"
+  js/carousel.js     botones y contador del carrusel
   fonts/             Atkinson Hyperlegible (400 y 700)
 _templates/          page.html y sections.html para copiar y pegar (Jekyll no los publica)
 ```
@@ -54,7 +60,13 @@ Para un componente nuevo: agregar sus estilos a `assets/css/components.css` con 
 1. Copiar `_templates/page.html` a la raíz con el nombre nuevo y completar `title` y `description`.
 2. Agregar su enlace en `_data/nav.yml`. El menú, el footer y `aria-current` salen del layout.
 
+## Agregar un recurso
+
+Editar `_data/resources.yml`: agregar el recurso a un grupo existente o crear un grupo nuevo. Lleva `title`, `description` y `url`, o `mail: responsable` si se solicita por correo. `platform` es opcional (`lego`, `spike`, `roberta`, `arduino`). `access` también (`online` o `offline`, que se muestra como "En línea" o "Sin internet"). Para una plataforma nueva: agregarla en `platforms`, definir `--cat-<clave>` en `tokens.css` y la regla `.tag-<clave>` en `components.css`. `resources.html` no se toca.
+
 ## Correos
+
+Las personas de contacto viven en `_data/people.yml`. Para escribir un correo suelto en cualquier página:
 
 No escribir direcciones en el HTML. Usar `<a data-mail-user="usuario" data-mail-domain="una.ac.cr"></a>`; `email.js` arma el `mailto:` en el navegador. Con el enlace vacío muestra la dirección, y con texto lo conserva.
 

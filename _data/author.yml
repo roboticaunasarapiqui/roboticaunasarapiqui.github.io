@@ -1,0 +1,4 @@
+# Quién hizo el sitio: el footer muestra el ícono de GitHub con enlace a este perfil.
+# `github` es solo el usuario (https://github.com/<usuario>). Vacío = no se muestra el ícono.
+name: Justin Moreira
+github: jussmoreira

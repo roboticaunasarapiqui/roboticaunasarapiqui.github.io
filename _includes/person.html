@@ -1,0 +1,16 @@
+{%- comment -%}
+  Tarjeta de contacto. Parámetro: person (un elemento de _data/people.yml).
+  El botón de copiar nace oculto: email.js lo muestra, así que sin JavaScript no queda un botón muerto.
+{%- endcomment -%}
+<address class="contact">
+    <h2>{{ include.person.role }}</h2>
+    <p><strong>{{ include.person.name }}</strong></p>
+    <div class="contact-mail">
+        <a class="contact-email" data-mail-user="{{ include.person.mail_user }}" data-mail-domain="{{ include.person.mail_domain }}"></a>
+        <button class="copy-button" type="button" data-copy-mail hidden>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><rect x="9" y="9" width="11" height="11"/><path d="M5 15V4h11"/></svg>
+            <span class="copy-label">Copiar correo</span>
+        </button>
+        <span class="sr-only" role="status"></span>
+    </div>
+</address>
