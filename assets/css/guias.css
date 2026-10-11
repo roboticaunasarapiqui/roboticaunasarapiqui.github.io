@@ -1,0 +1,136 @@
+/* Guías para docentes. Se suma a tokens.css, base.css y components.css del sitio:
+   aquí solo está lo propio de las guías (pasos, bloques para copiar, avance).
+   Colores, tipografía, header, footer, botón .action, franja STEAM y modo oscuro salen del sitio. */
+
+:root {
+  --tap: 2.75rem;
+  --mono: ui-monospace, "Cascadia Code", Consolas, Menlo, monospace;
+  --header-h: 4.07rem;
+  --guia-width: 46rem;
+}
+
+/* Una sola columna centrada: encabezado, pestañas y pasos comparten el mismo ancho */
+.hero-guia, .tabsbar, .section.guia {
+  --edge: max(var(--gutter), calc((100% - var(--guia-width)) / 2));
+}
+
+@media (min-width: 48rem) {
+  :root { --header-h: 4.22rem; }
+}
+
+/* encabezado: .hero del sitio, en una sola columna centrada */
+
+.hero-guia { grid-template-columns: 1fr; justify-items: center; gap: 0; padding-block: var(--space-4) calc(var(--space-4) + 0.5rem); text-align: center; }
+.hero-guia h1 { font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem); }
+.hero-guia .hero-copy { justify-items: center; gap: var(--space-2); }
+.hero-guia p:not(.hero-kicker) { font-size: var(--text-base); max-width: 40ch; }
+.guia-row { display: grid; justify-items: center; gap: var(--space-1); }
+.hero .guia-due { font-size: var(--text-sm); color: var(--ink); }
+
+/* botones */
+
+button.action { font: inherit; font-weight: 700; border: 0; cursor: pointer; }
+.action.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.action.ghost:hover, .action.ghost:focus-visible { color: var(--on-action-hover); box-shadow: none; }
+.guia .action { padding: 0.6rem 1.25rem; min-height: var(--tap); font-size: var(--text-sm); }
+.hero .action { padding: 0.95rem 1.75rem; font-size: var(--text-base); }
+
+code { font-family: var(--mono); font-size: 0.88em; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 3px; padding: 0 0.3em; }
+
+summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; align-items: center; gap: 0.6rem; min-height: var(--tap); }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; display: grid; place-items: center; flex: none; width: 1.4rem; height: 1.4rem; border: 1px solid var(--border-strong); border-radius: 2px; font-size: 1rem; line-height: 1; }
+details[open] > summary::before { content: "–"; }
+
+/* pestañas: dos módulos, cada uno con su propio avance (bajo el header fijo del sitio) */
+
+.tabsbar { position: sticky; top: var(--header-h); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--border); }
+.tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 24rem)); padding-inline: var(--edge); }
+.tab { display: grid; align-content: space-between; gap: 0.3rem; padding: 0.4rem 0.75rem; border: 0; border-top: 3px solid transparent; background: none; color: var(--ink-muted); font: inherit; font-weight: 700; line-height: 1.2; text-align: left; cursor: pointer; }
+.tab:hover { background: var(--surface-alt); color: var(--ink); }
+.tab[aria-selected="true"] { background: var(--surface-alt); color: var(--ink); border-top-color: var(--ink); }
+.tab-meter { display: flex; align-items: center; gap: 0.6rem; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+.tab-bar { position: relative; flex: 1; height: 0.4rem; border-radius: 2px; background: var(--border-strong); container-type: inline-size; }
+.tab-bar b { position: absolute; inset: 0 auto 0 0; width: 0; border-radius: inherit; background: var(--steam-s); transition: width var(--motion-duration-structural) var(--ease-standard); }
+
+.mod-intro { color: var(--ink-muted); max-width: 52ch; }
+
+/* bloques y pasos */
+
+.block { margin-top: var(--space-4); }
+.mod-intro + .block { margin-top: var(--space-3); }
+.block-head { margin-bottom: var(--space-2); }
+.eyebrow { display: flex; align-items: center; gap: 0.5rem; font-size: var(--text-sm); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+.eyebrow::before { content: ""; width: 0.7rem; height: 0.7rem; background: var(--mark); }
+.block-head h2 { margin-top: 0.25rem; }
+.intro { margin-top: 0.4rem; color: var(--ink-muted); max-width: 56ch; }
+
+.steps { list-style: none; padding: 0; display: grid; gap: var(--space-2); }
+.step { position: relative; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0 var(--space-2); scroll-margin-top: calc(var(--header-h) + 5rem); }
+
+.num { position: relative; z-index: 1; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 2px solid var(--border-strong); border-radius: var(--radius-control); background: var(--surface); font-weight: 700; font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+/* ladrillo: al completar un paso su número se vuelve una pieza con dos tachuelas */
+.num::before, .num::after { content: ""; position: absolute; top: calc(-0.3rem - 2px); width: 22%; height: 0.3rem; border-radius: 2px 2px 0 0; background: var(--steam-s); opacity: 0; }
+.num::before { left: 20%; }
+.num::after { right: 20%; }
+.step[data-done="true"] .num::before, .step[data-done="true"] .num::after { opacity: 1; }
+.num .tick { display: none; }
+.step[data-done="true"] .num { background: var(--steam-s); border-color: var(--steam-s); color: #fff; }
+.step[data-done="true"] .num b { display: none; }
+.step[data-done="true"] .num .tick { display: block; }
+.step.is-current .num { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+
+.card { display: grid; gap: 0.9rem; min-width: 0; padding: var(--space-2) var(--space-3) var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-control); background: var(--surface); }
+.step.is-current .card { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+.card-top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 0.25rem var(--space-2); }
+.card-top h3 { flex: 1 1 14rem; padding-top: 0.35rem; }
+.hecho { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
+.hecho input { width: 1.3rem; height: 1.3rem; margin: 0; accent-color: var(--ink); cursor: pointer; }
+.step[data-done="true"] h3 { color: var(--ink-muted); }
+
+.lista { display: grid; gap: 0.4rem; padding-left: 1.6rem; }
+.lista li::marker { font-weight: 700; color: var(--ink-muted); }
+.links { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.opc { font-size: var(--text-sm); color: var(--ink-muted); }
+.opc b { color: var(--ink); }
+
+/* robot que lleva el avance: viaja por la barra de su pestaña (el movimiento está en motion.css) */
+.tab-bot { position: absolute; bottom: calc(100% - 1px); left: 0; width: 1.7rem; translate: calc(var(--pf, 0) * (100cqw - 1.7rem)) 0; transition: translate var(--motion-duration-scene) var(--ease-enter); }
+.tab { gap: 0.8rem; }
+
+/* bloque para copiar (colores del pie del sitio) */
+
+.code { border-radius: var(--radius-control); background: var(--media-bg); color: var(--footer-strong); overflow: hidden; border: 1px solid var(--footer-rule); }
+.code-h { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.25rem var(--space-2); padding: 0.3rem 0.4rem 0.3rem 0.9rem; border-bottom: 1px solid var(--footer-rule); }
+.code-h span { font-size: var(--text-sm); font-weight: 700; color: var(--footer-text); }
+.code pre, pre.code { margin: 0; padding: 0.9rem; font-family: var(--mono); font-size: 0.92rem; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--footer-strong); }
+pre.code { margin-top: var(--space-1); }
+.code mark { padding: 0 0.2em; border-radius: 2px; background: var(--steam-e); color: #1d2327; }
+.copy { min-height: 2.25rem; padding: 0 0.9rem; border: 1px solid var(--footer-strong); border-radius: var(--radius-control); background: transparent; color: var(--footer-strong); font: inherit; font-size: var(--text-sm); font-weight: 700; cursor: pointer; }
+.copy:hover, .copy:focus-visible { background: var(--action-hover); border-color: var(--action-hover); color: #1d2327; }
+.code :focus-visible { outline-color: var(--footer-strong); }
+
+/* a su documento / va bien si ve / revise / ayuda */
+
+.to-doc, .ver { display: grid; gap: 0.2rem; padding: 0.6rem 0.9rem; background: var(--surface-alt); border-left: 4px solid var(--mark); border-radius: 0 var(--radius-control) var(--radius-control) 0; }
+.ver { display: block; border-left-color: var(--steam-s); }
+.lb { font-size: var(--text-sm); font-weight: 700; color: var(--ink-muted); }
+.ver .lb { display: block; }
+.peek summary { font-size: var(--text-sm); }
+.checks { list-style: none; padding: 0; display: grid; gap: 0.1rem; }
+.checks label { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.35rem 0; cursor: pointer; }
+.checks input { flex: none; width: 1.2rem; height: 1.2rem; margin: 0.2rem 0 0; accent-color: var(--ink); }
+
+.help { border-top: 1px solid var(--border); margin-top: -0.2rem; }
+.help summary { font-size: var(--text-sm); }
+.help dl { display: grid; gap: 0.8rem; padding: 0.2rem 0 0.4rem 2rem; font-size: var(--text-sm); }
+.help dt { font-weight: 700; }
+.help dd { color: var(--ink-muted); margin-top: 0.1rem; }
+
+@media (max-width: 40rem) {
+  .step { grid-template-columns: 1.9rem minmax(0, 1fr); gap: 0 0.6rem; }
+  .num { width: 1.9rem; height: 1.9rem; }
+  .card { padding: var(--space-2); }
+  .help dl { padding-left: 0; }
+  .tab { font-size: 0.95rem; padding-inline: 0.5rem; }
+}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
+    <title>Guía de la semana 1 | Robótica STEAM UNA Sarapiquí</title>
+    <meta name="description" content="Paso a paso del laboratorio 1 con su desafío y de la tarea 1, para docentes.">
+    <meta name="author" content="Universidad Nacional de Costa Rica">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roboticaunasarapiqui.github.io/guias/semana-1.html">
+    <meta property="og:title" content="Guía de la semana 1 | Robótica STEAM UNA Sarapiquí">
+    <meta property="og:description" content="Paso a paso del laboratorio 1 con su desafío y de la tarea 1, para docentes.">
+    <meta property="og:image" content="https://roboticaunasarapiqui.github.io/images/image-1.webp">
+
+    <link rel="icon" href="/images/logo-rana.webp" type="image/webp">
+    <link rel="preload" href="/assets/fonts/atkinson-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/tokens.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/motion.css">
+    <link rel="stylesheet" href="/assets/css/guias.css">
+    <script src="/assets/js/theme.js" defer></script>
+    <script src="/assets/js/nav.js" defer></script>
+    <script src="/assets/js/email.js" defer></script>
+    <script src="/assets/js/to-top.js" defer></script>
+    <script src="/assets/js/carousel.js" defer></script>
+    <script src="/assets/js/eyes.js" defer></script>
+    <script src="/assets/js/bricks.js" defer></script>
+    <script src="/assets/js/pieces.js" defer></script>
+</head>
+<body id="inicio">
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <header class="site-header">
+    <a class="site-brand" href="/"><img class="brand-mascot" src="/images/logo-rana.webp" alt="Robótica STEAM UNA Sarapiquí, inicio" width="500" height="500"></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menú de navegación"><span class="nav-toggle-bars"></span></button>
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+        <a href="/">Inicio</a>
+        <a href="/resources.html">Recursos</a>
+        <a href="/about.html">Sobre el proyecto</a>
+        <a href="/contact.html">Contacto</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Modo oscuro" hidden>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+</header>
+
+
+    <main id="contenido">
+        <div id="app"></div>
+<noscript><section class="section"><p>Esta guía necesita JavaScript. Actívelo en su navegador o consulte el enunciado en Moodle.</p></section></noscript>
+
+<script>
+/* Datos de la semana 1. El diseño, el avance y el copiar viven en assets/css/guias.css y assets/js/guias.js. */
+window.GUIA = {
+  id: 'semana-1',
+  titulo: 'Guía de la semana 1',
+  intro: 'Siga los pasos en orden. Todo se escribe en su documento, que es lo único que entrega.',
+  kicker: 'Introducción a la Robótica Educativa',
+  entrega: {
+    texto: 'Jueves 22-10-2026, antes de las 6:00 p. m.',
+    donde: 'Moodle'
+  },
+
+  modulos: [
+    /* ================= LABORATORIO 1 + DESAFÍO 1 ================= */
+    {
+      id: 'lab',
+      tab: 'Laboratorio 1',
+      intro: 'Incluye su desafío de extensión. Va a conocer el simulador, estudiar un programa ya hecho y modificarlo; no tiene que armar nada desde cero.',
+      archivo: 'IRE_Lab1_NombreApellido.pdf',
+      moodle: 'Laboratorio 1',
+      docTitulo: 'LABORATORIO 1 + DESAFÍO 1',
+
+      /* Cada sección es algo que debe quedar en el documento. La estructura que se copia
+         y la lista de revisión final salen de aquí. */
+      secciones: [
+        { id: 'cap1', titulo: 'Captura 1 · Sesión iniciada en Open Roberta Lab',
+          pega: 'Pegue la captura con su usuario a la vista. Que no se vea la contraseña.',
+          revisar: 'Captura 1: sesión iniciada en Open Roberta Lab, sin contraseña.' },
+        { id: 'cap2', titulo: 'Captura 2 · Programa base modificado (desafío)',
+          pega: 'Pegue la captura del programa modificado, con todos los bloques a la vista.',
+          revisar: 'Captura 2: programa base abierto y modificado con el desafío realizado.' },
+        { id: 'cap3', titulo: 'Captura 3 · Cuenta creada en Tinkercad',
+          pega: 'Pegue la captura con su usuario a la vista. Que no se vea la contraseña.',
+          revisar: 'Captura 3: cuenta creada en Tinkercad, sin contraseña.' },
+        { id: 'parrafo', titulo: 'Párrafo · Lo que predije, vi e investigué',
+          revisar: 'Párrafo de 3 a 5 líneas con lo que predijo, vio e investigó.' },
+        { id: 'pseudo', titulo: 'Desafío 1 · Pseudocódigo',
+          revisar: 'Pseudocódigo del desafío, y coincide con su programa.' },
+        { id: 'explic', titulo: 'Desafío 1 · Explicación',
+          revisar: 'Explicación del desafío: qué valores ajustó, por qué y qué parte se repite.' }
+      ],
+
+      bloques: [
+        { color: 's', eyebrow: 'Laboratorio 1 · 10 % · Parte A', titulo: 'Open Roberta Lab',
+          pasos: [
+            { titulo: 'Vea el video de repaso',
+              hacer: 'Ábralo en otra pestaña y pruebe en la herramienta lo que se muestra mientras lo ve.',
+              links: [{ label: 'Abrir el video', href: 'https://youtu.be/ItdCx2cuCvY' }],
+              ayuda: [['El video no abre o no tiene sonido', 'Pruebe con otro navegador y revise el volumen. Si sigue igual, avise por correo.']] },
+
+            { titulo: 'Cree su cuenta en Open Roberta Lab',
+              hacer: 'Es gratuita y sirve para guardar sus programas.',
+              lista: [
+                'Abra Open Roberta Lab con el botón de abajo.',
+                'Arriba busque el ícono de usuario o «Iniciar sesión»; ahí está la opción de crear cuenta.',
+                'Complete los datos y entre con su usuario.',
+                'Guarde su usuario y contraseña en un lugar seguro.'
+              ],
+              links: [{ label: 'Ir a Open Roberta Lab', href: 'https://lab.open-roberta.org/' }],
+              doc: { sec: 'cap1' },
+              ver: 'Su nombre de usuario arriba en la página: la sesión está iniciada.',
+              ayuda: [
+                ['No encuentro dónde crear la cuenta', 'Abra primero la opción de iniciar sesión; la de crear cuenta suele estar dentro de esa misma ventana.'],
+                ['Olvidé mi contraseña', 'Use la opción de recuperarla en la ventana de inicio de sesión.'],
+                ['Ya tenía cuenta', 'Úsela. No necesita crear otra.']
+              ] },
+
+            { titulo: 'Descargue y abra el programa base',
+              hacer: 'Es el programa ya hecho que usará en todo el laboratorio y en el desafío.',
+              lista: [
+                'Descargue el programa base desde el Moodle del curso.',
+                'Fíjese en qué carpeta se guardó (normalmente «Descargas»).',
+                'En Open Roberta Lab, con la sesión iniciada, busque la opción para abrir o importar un programa desde un archivo y escoja el que descargó.'
+              ],
+              ver: 'Varios bloques de colores, uno debajo del otro, en el área de trabajo.',
+              ayuda: [
+                ['No encuentro el archivo descargado', 'Abra «Descargas» y ordene por fecha: debería estar de primero.'],
+                ['No logro abrirlo', 'Descárguelo otra vez desde Moodle. Si no funciona, escriba por correo con una captura del mensaje que ve.'],
+                ['Me pide escoger un robot', 'Lea las instrucciones del programa base en Moodle. Si no dicen nada, pregunte antes de seguir.']
+              ] },
+
+            { titulo: 'Prediga qué hará el robot',
+              hacer: 'Todavía **no lo ejecute**. Lea los bloques de arriba abajo, como una receta, y complete la primera frase en su documento.',
+              doc: { sec: 'parrafo', text: 'Antes de ejecutar el programa predije que ___.' },
+              ayuda: [
+                ['No entiendo un bloque', 'Lea las palabras que trae: casi siempre dicen la acción (avanzar, girar, esperar) y un número que indica cuánto.'],
+                ['¿Y si me equivoco?', 'No pasa nada. Equivocarse aquí es parte de lo que se aprende y no baja la nota.']
+              ] },
+
+            { titulo: 'Ejecute el programa y compare',
+              hacer: 'Ahora sí: ejecútelo en el simulador y observe al robot de principio a fin. Puede repetirlo las veces que quiera.',
+              lista: [
+                'Busque el botón del simulador (suele decir «SIM») y púlselo.',
+                'Ejecute el programa y mire qué hace el robot.',
+                'Compare con lo que predijo y complete la segunda frase.'
+              ],
+              doc: { sec: 'parrafo', text: 'Al ejecutarlo vi que ___.' },
+              ver: 'Un robot que se mueve en la pantalla siguiendo los bloques.',
+              ayuda: [
+                ['No encuentro el simulador', 'Revise los botones del lado derecho de la pantalla o vuelva a ver ese momento del video de repaso.'],
+                ['El robot no se mueve', 'Verifique que todos los bloques estén unidos y ejecute otra vez.'],
+                ['Mi predicción no coincidió', 'Es normal y es lo más valioso: escriba la diferencia.']
+              ] },
+
+            { titulo: 'Investigue qué hace cada bloque',
+              hacer: 'Descubra qué bloque hace avanzar al robot, cuál lo hace girar y cuál lo detiene. Saberlo es lo que le permite modificar el programa en el desafío.',
+              lista: [
+                'Cambie un número dentro de un bloque y ejecute otra vez.',
+                'Observe qué cambió: eso le dice para qué sirve el bloque.',
+                'Repita con otro bloque y complete la tercera frase.'
+              ],
+              doc: { sec: 'parrafo', text: 'Al investigarlo descubrí que el bloque ___ hace avanzar al robot, el bloque ___ lo hace girar y el bloque ___ lo detiene.' },
+              ayuda: [
+                ['¿Puedo dañar el programa?', 'No. Si algo se desordena, descargue otra vez el programa base desde Moodle.'],
+                ['Cambié un número y no vi diferencia', 'Pruebe con un cambio grande, por ejemplo el doble, para que se note.']
+              ] }
+          ] },
+
+        { color: 'a', eyebrow: 'Laboratorio 1 · Parte B', titulo: 'Herramienta de circuitos',
+          intro: 'Solo crear la cuenta. La usará más adelante, en la semana del Arduino.',
+          pasos: [
+            { titulo: 'Cree su cuenta en Tinkercad',
+              hacer: 'Es gratuita. Puede registrarse con un correo o con la cuenta que la página le ofrezca.',
+              lista: [
+                'Abra Tinkercad y busque la opción para registrarse o unirse.',
+                'Complete el registro e inicie sesión.',
+                'Si pregunta qué tipo de cuenta quiere, escoja la de uso personal.'
+              ],
+              links: [{ label: 'Ir a Tinkercad', href: 'https://www.tinkercad.com/' }],
+              doc: { sec: 'cap3' },
+              ver: 'Su nombre o usuario arriba, ya dentro de Tinkercad.',
+              ayuda: [
+                ['Me pide un correo de la escuela', 'Use su correo personal.'],
+                ['No me llega el correo de confirmación', 'Revise la carpeta de correo no deseado y espere unos minutos antes de pedirlo otra vez.']
+              ] }
+          ] },
+
+        { color: 'm', eyebrow: 'Desafío de extensión 1 · 3,75 %', titulo: 'Mi robot simulado hace un cuadrado',
+          intro: 'Modifique el programa base para que el robot recorra un cuadrado: cuatro lados iguales y cuatro giros de 90 grados.',
+          pasos: [
+            { titulo: 'Escriba el pseudocódigo',
+              hacer: 'Antes de tocar los bloques, escriba en su documento los pasos del robot en palabras, como una receta. Con tres o cuatro líneas basta.',
+              doc: { sec: 'pseudo', text: '1. Avanzar ___\n2. Girar ___ grados\n3. Repetir los pasos 1 y 2 hasta completar ___ lados' },
+              ayuda: [
+                ['No sé cuánto debe girar', 'Piense en una esquina de un cuadrado: ¿cuántos grados tiene? Luego mire en el programa base cómo se escribe un giro.'],
+                ['¿Tengo que escribir las cuatro vueltas?', 'No. Puede escribir «repetir» aunque en los bloques copie y pegue el tramo.']
+              ] },
+
+            { titulo: 'Modifique el programa base',
+              hacer: 'Parta del programa que ya estudió. Puede copiar y pegar bloques.',
+              lista: [
+                'Identifique el tramo que hace un lado y una esquina.',
+                'Duplíquelo con clic derecho sobre el bloque, o con Ctrl+C y Ctrl+V.',
+                'Una los tramos hasta tener cuatro, uno debajo de otro.',
+                'Deje el bloque que detiene al robot solo al final.'
+              ],
+              ayuda: [
+                ['Los bloques no se pegan entre sí', 'Arrastre cada tramo hasta que quede justo debajo del anterior; verá que encajan.'],
+                ['El robot se detiene a la mitad', 'Revise que el bloque de detenerse no esté en medio de los tramos.']
+              ] },
+
+            { titulo: 'Ejecute y ajuste hasta que parezca un cuadrado',
+              hacer: 'Ejecute, observe la figura y corrija los valores. Cambie **un solo valor a la vez** para saber cuál produjo el cambio. Repita hasta cumplir:',
+              lista: [
+                'Los cuatro lados miden lo mismo.',
+                'Los cuatro giros son iguales.',
+                'El robot termina cerca de donde empezó.'
+              ],
+              opcional: 'pruebe un triángulo o un rectángulo.',
+              ver: 'Un recorrido que cierra, parecido a un cuadrado. No tiene que ser perfecto.',
+              ayuda: [
+                ['La figura queda abierta', 'Casi siempre el giro no completa la esquina. Ajuste el valor del giro un poco y pruebe otra vez.'],
+                ['Los lados salen desiguales', 'Revise que los cuatro bloques de avanzar tengan el mismo valor.']
+              ] },
+
+            { titulo: 'Tome la captura del programa modificado',
+              hacer: 'Con el programa modificado abierto, tome la captura. Que se vean todos los bloques; si no caben, aleje la vista del navegador con Ctrl y la tecla menos.',
+              doc: { sec: 'cap2' } },
+
+            { titulo: 'Explique qué ajustó',
+              hacer: 'Dos o tres oraciones con sus propias palabras.',
+              doc: { sec: 'explic', text: 'Ajusté ___ porque ___. La parte que se repite es ___.' } }
+          ] }
+      ]
+    },
+
+    /* ================= TAREA 1 ================= */
+    {
+      id: 'tarea',
+      tab: 'Tarea 1',
+      intro: 'Una ficha de una página, aproximadamente. Es el inicio de su propuesta de actividad de robótica: la mejora en las tareas 2 y 3 y se reúne en el proyecto integrador.',
+      archivo: 'IRE_Tarea1_NombreApellido.pdf',
+      moodle: 'Tarea 1',
+      docTitulo: 'TAREA 1 · FICHA DE MI INSTITUCIÓN Y MI GRUPO',
+      docNota: 'Va a armar **un solo documento**: la ficha. Cópiela y péguela en un Google Docs nuevo, y complete cada parte cuando llegue a ese paso. Si Moodle trae una plantilla de la ficha, use esa en lugar de esta.',
+
+      secciones: [
+        { id: 'inst', titulo: '1. Mi institución', revisar: 'Institución: nombre, nivel educativo y recursos disponibles.' },
+        { id: 'grupo', titulo: '2. Grupo meta', revisar: 'Grupo meta: nivel, edad aproximada y experiencia previa.' },
+        { id: 'curr', titulo: '3. Vinculación curricular', revisar: 'Vinculación curricular: asignatura y contenido del programa de estudio.' },
+        { id: 'prob', titulo: '4. Problema que resolverá el robot', revisar: 'Problema real, en dos o tres oraciones, que un robot sencillo puede ayudar a resolver.' },
+        { id: 'fuentes', titulo: '5. Fuentes y apoyo de IA', revisar: 'Fuentes y apoyo de IA anotados, o dice «No aplica».' }
+      ],
+
+      bloques: [
+        { color: 't', eyebrow: 'Tarea 1 · 5 %', titulo: 'Ficha de mi institución y mi grupo',
+          pasos: [
+            { titulo: 'Escriba sobre su institución',
+              hacer: 'Nombre, nivel educativo y recursos con que cuenta: dispositivos, internet y kits, si los hay.',
+              doc: { sec: 'inst', text: 'Trabajo en ___, un centro de nivel ___. Contamos con ___ (dispositivos), internet ___ y ___ (kits, si hay).' },
+              ayuda: [
+                ['No hay kits ni computadoras', 'Escríbalo tal cual. El curso no necesita kits y su propuesta se ajustará a lo que sí tiene.'],
+                ['Trabajo en más de una institución', 'Escoja una sola para esta ficha.']
+              ] },
+
+            { titulo: 'Describa su grupo meta',
+              hacer: 'El grupo al que iría dirigida la actividad: nivel, edad aproximada y qué experiencia previa tienen.',
+              doc: { sec: 'grupo', text: 'Mi grupo meta es ___ de nivel ___, con edades de alrededor de ___ años. Su experiencia previa con tecnología o robótica es ___.' },
+              ayuda: [
+                ['Atiendo varios grupos', 'Escoja uno. La propuesta de actividad se diseña para un grupo.'],
+                ['No tengo grupo asignado ahora', 'Describa el grupo con el que podría aplicar la actividad.']
+              ] },
+
+            { titulo: 'Indique la vinculación curricular',
+              hacer: 'Con qué asignatura y contenido del programa de estudio se relaciona su actividad.',
+              lista: [
+                'Abra el programa de estudio de la asignatura que enseña.',
+                'Busque un contenido o habilidad que se pueda practicar con instrucciones paso a paso.',
+                'Escríbalo como aparece en el programa.'
+              ],
+              doc: { sec: 'curr', text: 'Asignatura: ___. Contenido del programa de estudio: ___.' },
+              ayuda: [['No encuentro un contenido que encaje', 'Empiece por lo que ya enseña y pregúntese: ¿esto se podría practicar dando instrucciones a un robot? Si no ve la relación, comente su caso en la sesión.']] },
+
+            { titulo: 'Defina el problema que resolverá el robot',
+              hacer: 'Una situación real de su aula, institución o comunidad, en dos o tres oraciones. Es la parte más importante de la ficha: de aquí sale toda su propuesta.',
+              doc: { sec: 'prob', text: 'Hoy ___. Esto importa porque ___. Un robot sencillo podría ___ para ayudar a ___.' },
+              chequeo: [
+                'Es una situación real, no una idea general como «mejorar la educación».',
+                'Un robot sencillo (que avance, gire o detecte algo) puede ayudar a resolverla.',
+                'Está en dos o tres oraciones.'
+              ],
+              ayuda: [
+                ['No se me ocurre un problema', 'Piense en algo que se repite en su aula y cuesta enseñar o practicar.'],
+                ['Mi idea es muy grande', 'Redúzcala a una situación pequeña y concreta que un robot sencillo pueda ayudar a resolver.']
+              ] },
+
+            { titulo: 'Anote sus fuentes y el apoyo de IA',
+              hacer: 'Los enlaces o documentos que consultó. Si usó IA, qué le pidió y qué decidió usted.',
+              doc: { sec: 'fuentes', text: 'Fuentes consultadas: ___. Apoyo de IA: ___ (qué pedí y qué decidí yo). Si no aplica, escriba «No aplica».' },
+              ayuda: [['Usé IA, ¿qué anoto?', 'La pregunta que le hizo y una frase sobre lo que usted cambió o descartó. El trabajo es individual y usted debe poder explicarlo.']] }
+          ] }
+      ]
+    }
+  ]
+};
+</script>
+<script src="/assets/js/guias.js"></script>
+
+    </main>
+
+    <footer class="site-footer">
+    <span class="steam-bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+
+    <div class="line-track" aria-hidden="true"><svg class="robot" viewBox="0 0 36 28" aria-hidden="true" focusable="false"><g class="r-top"><rect class="r-stud" x="9" y="1" width="6" height="3" rx="1"/><rect class="r-stud" x="21" y="1" width="6" height="3" rx="1"/><rect class="r-body" x="4" y="4" width="28" height="15" rx="3"/><rect class="r-eye" x="9" y="8" width="18" height="6" rx="3"/><circle class="r-pupil" cx="14" cy="11" r="1.6"/><circle class="r-pupil" cx="22" cy="11" r="1.6"/></g><g class="r-wheel"><circle cx="11" cy="22" r="5"/><path d="M11 18v8"/></g><g class="r-wheel"><circle cx="25" cy="22" r="5"/><path d="M25 18v8"/></g></svg>
+</div>
+    <div class="footer-grid">
+        <div class="footer-block">
+            <img class="footer-logo" src="/images/logo-una-sarapiqui-blanco.png" alt="Universidad Nacional de Costa Rica - Sección Regional Huetar Norte y Caribe, Sarapiquí" width="1310" height="750" loading="lazy">
+            <h2 class="footer-title">Proyecto 0268-22</h2>
+            <p>Robótica para el Desarrollo de Habilidades STEAM</p>
+            <p>Universidad Nacional de Costa Rica, Sarapiquí</p>
+        </div>
+        <nav class="footer-block" aria-label="Pie de página">
+            <h2 class="footer-title">Navegar</h2>
+            <ul class="footer-list">
+                <li><a class="footer-link" href="/">Inicio</a></li>
+                <li><a class="footer-link" href="/resources.html">Recursos</a></li>
+                <li><a class="footer-link" href="/about.html">Sobre el proyecto</a></li>
+                <li><a class="footer-link" href="/contact.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="footer-block">
+            <h2 class="footer-title">Contacto</h2>
+            <p>MAG. Steven Cruz Sancho, responsable del proyecto</p>
+            <a class="footer-link" data-mail-user="steven.cruz.sancho" data-mail-domain="una.ac.cr"></a>
+            <a class="footer-icon" href="https://github.com/jussmoreira" target="_blank" rel="noopener noreferrer" aria-label="Sitio creado por Justin Moreira, perfil de GitHub" title="Sitio creado por Justin Moreira">
+                <svg viewBox="0 0 16 16" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            </a>
+        </div>
+    </div>
+</footer>
+<a class="to-top" href="#inicio" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M12 20V5M5 11.5l7-7 7 7"/></svg>
+</a>
+
+</body>
+</html>

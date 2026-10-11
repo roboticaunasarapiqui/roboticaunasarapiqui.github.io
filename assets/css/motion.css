@@ -1,0 +1,950 @@
+/*
+  Intent:   una sola escena de entrada (hero), feedback en acciones y continuidad entre páginas.
+  Spec:     tokens --motion-* y --ease-*; solo opacity, translate, scale, clip-path y color.
+  Fallback: las animaciones de entrada y de scroll solo existen con prefers-reduced-motion: no-preference;
+            animation-timeline va dentro de @supports y los navegadores sin soporte muestran el estado final.
+*/
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--motion-duration-route);
+  animation-timing-function: var(--ease-standard);
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+.site-footer {
+  view-transition-name: site-footer;
+}
+
+/* Feedback */
+
+a {
+  transition:
+    color var(--motion-duration-quick) var(--ease-standard),
+    text-decoration-thickness var(--motion-duration-quick) var(--ease-standard);
+}
+
+@media (hover: hover) {
+  .footer-icon:hover {
+    scale: 1.12;
+  }
+}
+
+.footer-icon {
+  transition:
+    color var(--motion-duration-quick) var(--ease-standard),
+    scale var(--motion-duration-normal) var(--ease-enter);
+}
+
+.action::before,
+.row-links a::before,
+.site-nav a::after,
+.footer-link::after {
+  transition: scale var(--motion-duration-structural) var(--ease-enter);
+}
+
+.copy-button,
+.theme-toggle {
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    border-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard);
+}
+
+/* El botón flotante se desvanece al salir; visibility espera a que termine el fade */
+
+.to-top {
+  translate: 0 var(--motion-distance-sm);
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard),
+    opacity var(--motion-duration-normal) var(--ease-exit),
+    translate var(--motion-duration-normal) var(--ease-exit),
+    visibility 0s linear var(--motion-duration-normal);
+}
+
+.to-top.is-visible {
+  translate: 0 0;
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    color var(--motion-duration-quick) var(--ease-standard),
+    opacity var(--motion-duration-normal) var(--ease-enter),
+    translate var(--motion-duration-normal) var(--ease-enter),
+    visibility 0s;
+}
+
+.to-top svg {
+  transition: translate var(--motion-duration-normal) var(--ease-enter);
+}
+
+.to-top:hover svg,
+.to-top:focus-visible svg {
+  translate: 0 -3px;
+}
+
+.guia-card,
+.guia-go {
+  transition:
+    background-color var(--motion-duration-quick) var(--ease-standard),
+    border-color var(--motion-duration-quick) var(--ease-standard),
+    translate var(--motion-duration-normal) var(--ease-enter);
+}
+
+@media (hover: hover) {
+  .guia-card:has(.guia-link):hover {
+    background: var(--surface-alt);
+    border-color: var(--ink);
+  }
+
+  .guia-card:has(.guia-link):hover .guia-go {
+    translate: var(--motion-distance-sm) 0;
+  }
+}
+
+.row-links strong {
+  transition:
+    translate var(--motion-duration-normal) var(--ease-enter),
+    color var(--motion-duration-quick) var(--ease-standard);
+}
+
+/* Menú móvil */
+
+.site-nav {
+  transition:
+    opacity var(--motion-duration-quick) var(--ease-exit),
+    translate var(--motion-duration-quick) var(--ease-exit),
+    visibility 0s linear var(--motion-duration-quick);
+}
+
+.nav-toggle[aria-expanded="true"] + .site-nav {
+  transition:
+    opacity var(--motion-duration-normal) var(--ease-enter),
+    translate var(--motion-duration-normal) var(--ease-enter),
+    visibility 0s;
+}
+
+.nav-toggle-bars,
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  transition:
+    translate var(--motion-duration-quick) var(--ease-standard),
+    rotate var(--motion-duration-quick) var(--ease-standard),
+    background-color var(--motion-duration-quick) var(--ease-standard);
+}
+
+@media (min-width: 48rem) {
+  .site-nav {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Galería circular: una tira de ancho por vuelta (la duración la calcula carousel.js); se detiene al apuntarla */
+
+  @keyframes carousel-loop {
+    to {
+      translate: -50% 0;
+    }
+  }
+
+  .is-looping .carousel-track {
+    animation: carousel-loop var(--carousel-loop, 60s) linear infinite;
+  }
+
+  .is-looping:hover .carousel-track,
+  .is-looping:focus-within .carousel-track {
+    animation-play-state: paused;
+  }
+
+  /* Escena del hero: título por palabras, foto en barrido, luego texto y botón */
+
+  @keyframes word-up {
+    from {
+      translate: 0 105%;
+    }
+
+    to {
+      translate: 0 0;
+    }
+  }
+
+  @keyframes wipe-up {
+    from {
+      clip-path: inset(100% 0 0 0);
+      scale: 1.08;
+    }
+
+    to {
+      clip-path: inset(0);
+      scale: 1;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 var(--motion-distance-md);
+    }
+
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  .hero h1 .word > span {
+    animation: word-up var(--motion-duration-scene) var(--ease-enter) both;
+    animation-delay: calc(120ms + var(--i, 0) * var(--motion-stagger));
+  }
+
+  .hero h1 .word:nth-child(2) > span { --i: 1; }
+  .hero h1 .word:nth-child(3) > span { --i: 2; }
+  .hero h1 .word:nth-child(4) > span { --i: 3; }
+  .hero h1 .word:nth-child(5) > span { --i: 4; }
+  .hero h1 .word:nth-child(6) > span { --i: 5; }
+  .hero h1 .word:nth-child(7) > span { --i: 6; }
+
+  .hero-media {
+    animation: wipe-up calc(var(--motion-duration-scene) + 200ms) var(--ease-enter) 200ms both;
+  }
+
+  .hero-copy > p,
+  .hero-copy > .action {
+    animation: rise var(--motion-duration-structural) var(--ease-enter) 700ms both;
+  }
+
+  .hero-copy > .action {
+    animation-delay: 820ms;
+  }
+
+  /* Inicio: las letras de STEAM caen despacio desde arriba y encajan una tras otra en su lugar
+     (se aplastan un poco al chocar). El contenedor de la palabra reserva el espacio, así que el título no salta */
+
+  @keyframes letter-drop {
+    0% {
+      translate: 0 -12rem;
+      opacity: 0;
+      animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5);
+    }
+
+    25% {
+      opacity: 1;
+    }
+
+    62% {
+      translate: 0 0;
+      scale: 1 1;
+      animation-timing-function: var(--ease-standard);
+    }
+
+    72% {
+      scale: 1.06 0.88;
+      animation-timing-function: var(--ease-standard);
+    }
+
+    86% {
+      translate: 0 -0.06em;
+      scale: 0.99 1.04;
+      animation-timing-function: var(--ease-standard);
+    }
+
+    100% {
+      translate: 0 0;
+      scale: 1 1;
+    }
+  }
+
+  .hero h1 .word-steam > span {
+    animation: none;
+  }
+
+  .steam-letter {
+    position: relative;
+    z-index: 1;
+    animation: letter-drop 1.1s backwards;
+    animation-delay: calc(800ms + var(--n, 0) * 180ms);
+  }
+
+  @media (hover: hover) {
+    .steam-letter {
+      transition: translate var(--motion-duration-normal) var(--ease-enter);
+    }
+
+    .steam-letter:hover {
+      translate: 0 -0.08em;
+    }
+  }
+
+  /* Robot del pie: recorre la franja STEAM de ida y vuelta (lleva 100cqw de la pista, ver .line-track) */
+
+  @keyframes line-drive {
+    0% {
+      translate: 0 0;
+      scale: 1 1;
+    }
+
+    44% {
+      translate: calc(100cqw - var(--robot-width)) 0;
+      scale: 1 1;
+    }
+
+    50% {
+      translate: calc(100cqw - var(--robot-width)) 0;
+      scale: -1 1;
+    }
+
+    94% {
+      translate: 0 0;
+      scale: -1 1;
+    }
+
+    100% {
+      translate: 0 0;
+      scale: 1 1;
+    }
+  }
+
+  @keyframes wheel-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @keyframes robot-bob {
+    50% {
+      translate: 0 -1px;
+    }
+  }
+
+  .line-track .robot {
+    animation: line-drive 24s linear infinite;
+  }
+
+  .line-track .r-wheel {
+    animation: wheel-spin 0.9s linear infinite;
+  }
+
+  .line-track .r-top {
+    animation: robot-bob 0.3s ease-in-out infinite;
+  }
+
+  /* Guías: el paso completado cae y encaja como una pieza LEGO (con un pequeño aplastamiento al chocar) */
+
+  @keyframes brick-snap {
+    0% {
+      translate: 0 -1rem;
+      opacity: 0;
+      scale: 1 1.06;
+    }
+
+    35% {
+      opacity: 1;
+    }
+
+    58% {
+      translate: 0 0.1rem;
+      scale: 1.07 0.9;
+    }
+
+    80% {
+      translate: 0 -0.04rem;
+      scale: 0.98 1.03;
+    }
+
+    100% {
+      translate: 0 0;
+      scale: 1 1;
+    }
+  }
+
+  .step.just-done .num {
+    animation: brick-snap 0.5s var(--ease-enter) both;
+  }
+
+  /* Sobre el proyecto: la ficha elegida encaja como un ladrillo y su texto entra desde un lado */
+
+  @keyframes panel-in {
+    from {
+      translate: var(--motion-distance-md) 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes stud-pop {
+    from {
+      translate: 0 0.4rem;
+      opacity: 0;
+    }
+  }
+
+  /* El botón STEAM del texto invita a tocarlo: las letras dan un salto en ola cada pocos segundos (se detiene al abrir) */
+
+  @keyframes steam-wave {
+    0%,
+    34%,
+    100% {
+      translate: 0 0;
+    }
+
+    9% {
+      translate: 0 -0.32em;
+    }
+
+    19% {
+      translate: 0 0.05em;
+    }
+
+    26% {
+      translate: 0 -0.08em;
+    }
+  }
+
+  .steam-trigger[aria-expanded="false"] .steam-trigger-letter {
+    animation: steam-wave 5s ease-in-out infinite;
+    animation-delay: calc(1.5s + var(--n, 0) * 90ms);
+  }
+
+  .steam-gear {
+    transition: rotate var(--motion-duration-scene) var(--ease-enter);
+  }
+
+  .steam-trigger[aria-expanded="false"] .steam-gear {
+    animation: wheel-spin 6s linear infinite;
+  }
+
+  @media (hover: hover) {
+    .steam-trigger:hover .steam-trigger-letter {
+      animation: none;
+      translate: 0 -0.12em;
+      transition: translate var(--motion-duration-normal) var(--ease-enter);
+    }
+  }
+
+  .is-ready .steam-tile[aria-selected="true"] .steam-tile-letter {
+    animation: brick-snap 0.5s var(--ease-enter) both;
+  }
+
+  .is-ready .steam-tile[aria-selected="true"]::before,
+  .is-ready .steam-tile[aria-selected="true"]::after {
+    animation: stud-pop 0.3s var(--ease-enter) 0.15s backwards;
+  }
+
+  .is-ready .steam-panel:not([hidden]) {
+    animation: panel-in var(--motion-duration-structural) var(--ease-enter);
+  }
+
+  .chip {
+    transition:
+      background-color var(--motion-duration-quick),
+      color var(--motion-duration-quick),
+      border-color var(--motion-duration-quick);
+  }
+
+  /* Todos los robots parpadean de vez en cuando (aplastan las pupilas) y miran al cursor (eyes.js) */
+
+  @keyframes blink {
+    0%,
+    93%,
+    97%,
+    100% {
+      scale: 1 1;
+    }
+
+    95% {
+      scale: 1 0.1;
+    }
+  }
+
+  .r-pupil {
+    animation: blink var(--blink, 6s) ease-in-out infinite;
+    transition: translate 140ms ease-out;
+  }
+
+  .line-track {
+    --blink: 7.3s;
+  }
+
+  .tab-bot {
+    --blink: 5.3s;
+  }
+
+  /* Contacto: el robot entra rodando con su cartel; el cartel se balancea sobre el palo; al copiar el correo, salta de alegría (el salto lo hace bricks.js sin tocar estas animaciones, para que no se repita la entrada) */
+
+  @keyframes roll-in {
+    from {
+      translate: -14rem 0;
+      opacity: 0;
+    }
+
+    to {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes sign-sway {
+    0%,
+    100% {
+      rotate: -0.8deg;
+    }
+
+    50% {
+      rotate: 0.8deg;
+    }
+  }
+
+  .contact-stage {
+    animation: roll-in 1.3s var(--ease-enter) backwards;
+    transform-origin: bottom left;
+  }
+
+  .contact-stage .r-wheel {
+    animation: wheel-spin 0.65s linear 2;
+  }
+
+  .contact-sign {
+    animation: sign-sway 4.5s ease-in-out infinite;
+  }
+
+  /* Piezas de electrónica: los LED se encienden en cadena, el LED de la placa parpadea, el servo barre de un lado a otro
+     y el sensor emite ondas */
+
+  @keyframes led-chase {
+    0%,
+    14% {
+      opacity: 1;
+    }
+
+    15%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes l-blink {
+    0%,
+    49% {
+      opacity: 1;
+    }
+
+    50%,
+    100% {
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes servo-sweep {
+    from {
+      rotate: -55deg;
+    }
+
+    to {
+      rotate: 55deg;
+    }
+  }
+
+  @keyframes wave-out {
+    0% {
+      translate: 0 3px;
+      opacity: 0.8;
+    }
+
+    100% {
+      translate: 0 -6px;
+      opacity: 0;
+    }
+  }
+
+  .led-lit {
+    animation: led-chase 4s linear infinite;
+    animation-delay: calc(var(--i, 0) * 0.5s);
+  }
+
+  .led.is-on .led-lit {
+    animation: none;
+  }
+
+  .c-l,
+  .c-l-glow {
+    animation: l-blink 2s steps(1) infinite;
+  }
+
+  .is-fast .c-l,
+  .is-fast .c-l-glow {
+    animation-duration: 0.3s;
+  }
+
+  .c-horn {
+    animation: servo-sweep 2.4s ease-in-out infinite alternate;
+  }
+
+  .is-paused .c-horn {
+    animation-play-state: paused;
+  }
+
+  .wave {
+    animation: wave-out 1.8s ease-out infinite;
+    animation-delay: calc(var(--n, 0) * 0.6s);
+  }
+
+  /* Contacto: el cursor de la pantalla parpadea y, al copiar el correo, la pantalla destella */
+
+  @keyframes cursor-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes lcd-flash {
+    0%,
+    40% {
+      filter: brightness(1.45);
+    }
+
+    20%,
+    60%,
+    100% {
+      filter: brightness(1);
+    }
+  }
+
+  .contact-status::after {
+    animation: cursor-blink 1s steps(1) infinite;
+  }
+
+  .contact-stage[data-copied] .contact-screen {
+    animation: lcd-flash 0.6s steps(1);
+  }
+
+  /* Recursos: al elegir una plataforma, su dibujo salta y se anima mientras la ficha está elegida */
+
+  @keyframes chip-pop {
+    0% {
+      scale: 0.6;
+    }
+
+    55% {
+      scale: 1.3;
+    }
+
+    100% {
+      scale: 1;
+    }
+  }
+
+  @keyframes dot-flicker {
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  @keyframes scan {
+    from {
+      translate: 0 0;
+    }
+
+    to {
+      translate: 0 3px;
+    }
+  }
+
+  .chip[aria-pressed="true"] .chip-icon {
+    animation: chip-pop 0.45s var(--ease-enter);
+  }
+
+  .chip[aria-pressed="true"] .i-led {
+    animation: l-blink 1s steps(1) infinite;
+  }
+
+  .chip[aria-pressed="true"] .i-dot {
+    animation: dot-flicker 1.2s ease-in-out infinite;
+    animation-delay: calc(var(--n, 0) * 0.13s);
+  }
+
+  .chip[aria-pressed="true"] .i-eye {
+    animation: blink 2.4s ease-in-out infinite;
+  }
+
+  .chip[aria-pressed="true"] .i-scan {
+    animation: scan 0.9s steps(4) infinite alternate;
+  }
+
+  /* Guías: el robot de la barra mueve las ruedas mientras avanza y salta al completar todo el módulo */
+
+  @keyframes bot-cheer {
+    0%,
+    100% {
+      rotate: 0deg;
+      margin-bottom: 0;
+    }
+
+    25% {
+      margin-bottom: 0.5rem;
+      rotate: -8deg;
+    }
+
+    50% {
+      margin-bottom: 0;
+    }
+
+    75% {
+      margin-bottom: 0.4rem;
+      rotate: 8deg;
+    }
+  }
+
+  .tab.moving .r-wheel {
+    animation: wheel-spin 0.5s linear infinite;
+  }
+
+  .tab.cheer .tab-bot {
+    animation: bot-cheer 1s var(--ease-standard) 1;
+  }
+
+  .tab.cheer .r-wheel {
+    animation: wheel-spin 0.5s linear infinite;
+  }
+
+  /* La franja STEAM encaja pieza por pieza al final de la escena */
+
+  @keyframes snap-in {
+    from {
+      scale: 0 1;
+    }
+
+    to {
+      scale: 1 1;
+    }
+  }
+
+  .steam-bar i {
+    transform-origin: left;
+  }
+
+  /* Después de encajar, una ola de brillo recorre la franja cada 8 s */
+
+  @keyframes steam-wave {
+    0%,
+    10%,
+    100% {
+      opacity: 1;
+    }
+
+    5% {
+      opacity: 0.45;
+    }
+  }
+
+  .hero .steam-bar i {
+    animation:
+      snap-in var(--motion-duration-structural) var(--ease-enter) both,
+      steam-wave 8s linear infinite;
+    animation-delay:
+      calc(950ms + var(--i, 0) * var(--motion-stagger)),
+      calc(2400ms + var(--i, 0) * 160ms);
+  }
+
+  .hero .steam-bar i:nth-child(2) { --i: 1; }
+  .hero .steam-bar i:nth-child(3) { --i: 2; }
+  .hero .steam-bar i:nth-child(4) { --i: 3; }
+  .hero .steam-bar i:nth-child(5) { --i: 4; }
+
+  /* El logo salta al pasar el cursor, y por su cuenta cada 12 s (mismo salto, en un ciclo largo) */
+
+  @keyframes hop {
+    0% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    35% {
+      translate: 0 -9px;
+      rotate: -7deg;
+    }
+
+    60% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    78% {
+      translate: 0 -3px;
+      rotate: -2deg;
+    }
+
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes hop-idle {
+    0%,
+    4.67%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+
+    1.63% {
+      translate: 0 -9px;
+      rotate: -7deg;
+    }
+
+    3.64% {
+      translate: 0 -3px;
+      rotate: -2deg;
+    }
+  }
+
+  .site-brand img {
+    animation: hop-idle 12s var(--ease-standard) 4s infinite;
+  }
+
+  @media (hover: hover) {
+    .site-brand:hover img,
+    .site-brand:hover .brand-mascot {
+      animation: hop 560ms var(--ease-standard);
+    }
+  }
+
+  .site-brand:focus-visible img,
+  .site-brand:focus-visible .brand-mascot {
+    animation: hop 560ms var(--ease-standard);
+  }
+
+  /* Scroll: sin JS, solo donde el navegador soporta animation-timeline */
+
+  @supports (animation-timeline: view()) {
+    @keyframes reveal-media {
+      from {
+        clip-path: inset(14%);
+        scale: 1.12;
+      }
+
+      to {
+        clip-path: inset(0);
+        scale: 1;
+      }
+    }
+
+    @keyframes header-edge {
+      from {
+        border-bottom-color: transparent;
+      }
+
+      to {
+        border-bottom-color: var(--border);
+      }
+    }
+
+    @keyframes draw-line {
+      from {
+        scale: 0 1;
+      }
+
+      to {
+        scale: 1 1;
+      }
+    }
+
+    @keyframes drift {
+      from {
+        translate: 0 0;
+      }
+
+      to {
+        translate: 0 28px;
+      }
+    }
+
+    .video {
+      animation: reveal-media linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    .site-header {
+      animation: header-edge linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80px;
+    }
+
+    /* Barra de lectura bajo el header */
+
+    .site-header::after {
+      animation: draw-line linear both;
+      animation-timeline: scroll(root);
+    }
+
+    /* Títulos y filas entran al llegar a pantalla; cada fila dibuja su línea inferior */
+
+    .section h2 {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    .row-links li,
+    .resource-row,
+    .guia-card {
+      view-timeline: --row;
+      animation: rise linear both;
+      animation-timeline: --row;
+      animation-range: entry 0% entry 55%;
+    }
+
+    .row-links li::after,
+    .resource-row::after {
+      animation: draw-line linear both;
+      animation-timeline: --row;
+      animation-range: entry 15% entry 90%;
+    }
+
+    /* La foto del hero se desplaza más lento que el scroll */
+
+    .hero-media {
+      animation:
+        wipe-up calc(var(--motion-duration-scene) + 200ms) var(--ease-enter) 200ms both,
+        drift linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 600px;
+    }
+
+    /* La franja del footer se despliega pieza por pieza al llegar al final */
+
+    .site-footer {
+      view-timeline: --footer;
+    }
+
+    .site-footer .steam-bar i {
+      animation: snap-in linear both;
+      animation-timeline: --footer;
+    }
+
+    .site-footer .steam-bar i:nth-child(1) { animation-range: entry 0% entry 45%; }
+    .site-footer .steam-bar i:nth-child(2) { animation-range: entry 10% entry 55%; }
+    .site-footer .steam-bar i:nth-child(3) { animation-range: entry 20% entry 65%; }
+    .site-footer .steam-bar i:nth-child(4) { animation-range: entry 30% entry 75%; }
+    .site-footer .steam-bar i:nth-child(5) { animation-range: entry 40% entry 85%; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
